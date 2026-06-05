@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital For All — Accessibility Self-Audit | DMAP 2026</title>
+<meta name="description" content="A free self-audit checklist for digital marketers in the Philippines to assess their accessibility and inclusive communication practices. Launched by DMAP for Digital For All advocacy.">
+<meta property="og:title" content="Digital For All — Accessibility Self-Audit">
+<meta property="og:description" content="Audit your website, social media, campaigns, and communication for accessibility and inclusion. Free tool by DMAP Philippines.">
+<meta property="og:type" content="website">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --purple-50: #EEEDFE;
+    --purple-100: #CECBF6;
+    --purple-200: #AFA9EC;
+    --purple-400: #7F77DD;
+    --purple-600: #534AB7;
+    --purple-800: #3C3489;
+    --purple-900: #26215C;
+    --teal-50: #E1F5EE;
+    --teal-100: #9FE1CB;
+    --teal-400: #1D9E75;
+    --teal-600: #0F6E56;
+    --teal-800: #085041;
+    --coral-50: #FAECE7;
+    --coral-100: #F5C4B3;
+    --coral-400: #D85A30;
+    --coral-600: #993C1D;
+    --coral-800: #712B13;
+    --pink-50: #FBEAF0;
+    --pink-100: #F4C0D1;
+    --pink-600: #993556;
+    --pink-800: #72243E;
+    --amber-50: #FAEEDA;
+    --amber-100: #FAC775;
+    --amber-400: #BA7517;
+    --amber-800: #633806;
+    --green-50: #EAF3DE;
+    --green-800: #27500A;
+    --gray-100: #D3D1C7;
+    --gray-600: #5F5E5A;
+
+    --bg: #ffffff;
+    --bg-secondary: #f8f7f5;
+    --bg-tertiary: #f1efe8;
+    --text-primary: #1a1a18;
+    --text-secondary: #5f5e5a;
+    --text-tertiary: #888780;
+    --border: rgba(0,0,0,0.10);
+    --border-med: rgba(0,0,0,0.18);
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1a18;
+      --bg-secondary: #222220;
+      --bg-tertiary: #2a2a28;
+      --text-primary: #f0ede8;
+      --text-secondary: #a8a59e;
+      --text-tertiary: #6e6c67;
+      --border: rgba(255,255,255,0.08);
+      --border-med: rgba(255,255,255,0.14);
+      --purple-50: #2a2850;
+      --teal-50: #0d2820;
+      --coral-50: #2e1810;
+      --pink-50: #2a1520;
+      --amber-50: #2a2010;
+      --green-50: #122010;
+    }
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  .nav {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    gap: 1rem;
+  }
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .nav-logo {
+    width: 28px;
+    height: 28px;
+    background: var(--purple-600);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-logo svg { width: 16px; height: 16px; fill: #fff; }
+  .nav-name { font-size: 14px; font-weight: 600; color: var(--text-primary); letter-spacing: -0.01em; }
+  .nav-tag { font-size: 11px; color: var(--text-tertiary); margin-top: 1px; }
+  .nav-score-pill {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 99px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 1.5rem 2.5rem;
+  }
+  .hero-inner { max-width: 800px; margin: 0 auto; }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--purple-600);
+    background: var(--purple-50);
+    padding: 4px 10px;
+    border-radius: 99px;
+    margin-bottom: 1.25rem;
+  }
+  .hero-eyebrow span { width: 6px; height: 6px; background: var(--purple-400); border-radius: 50%; display: inline-block; }
+  .hero-title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+  .hero-title em { font-style: normal; color: var(--purple-600); }
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 13px;
+    color: var(--text-tertiary);
+  }
+  .hero-meta strong { color: var(--text-secondary); font-weight: 500; }
+
+  /* SCORE PANEL */
+  .score-panel {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 1.25rem 1.5rem;
+    position: sticky;
+    top: 56px;
+    z-index: 90;
+    box-shadow: var(--shadow-sm);
+  }
+  .score-inner { max-width: 800px; margin: 0 auto; }
+  .score-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 10px; }
+  .score-label { font-size: 13px; color: var(--text-secondary); flex-shrink: 0; }
+  .score-number { font-size: 20px; font-weight: 700; color: var(--text-primary); margin-left: auto; flex-shrink: 0; }
+  .score-denom { font-size: 13px; color: var(--text-tertiary); }
+  .bar-track { height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; margin-bottom: 8px; }
+  .bar-fill { height: 100%; border-radius: 99px; background: var(--purple-400); transition: width 0.4s ease; width: 0%; }
+  .verdict-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .verdict-badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 99px;
+    background: var(--bg-secondary);
+    color: var(--text-tertiary);
+    transition: all 0.3s;
+  }
+  .section-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto; }
+  .section-pill {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 99px;
+    border: 1px solid var(--border);
+    color: var(--text-tertiary);
+    background: transparent;
+    white-space: nowrap;
+  }
+
+  /* MAIN CONTENT */
+  .main { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  /* TABS */
+  .tabs-wrap { display: flex; gap: 6px; margin-bottom: 2rem; flex-wrap: wrap; }
+  .tab-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 99px;
+    border: 1px solid var(--border-med);
+    background: var(--bg);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .tab-btn:hover { background: var(--bg-secondary); color: var(--text-primary); }
+  .tab-btn.active-purple { background: var(--purple-50); border-color: var(--purple-200); color: var(--purple-800); }
+  .tab-btn.active-teal   { background: var(--teal-50);   border-color: var(--teal-100);   color: var(--teal-800); }
+  .tab-btn.active-coral  { background: var(--coral-50);  border-color: var(--coral-100);  color: var(--coral-800); }
+  .tab-btn.active-pink   { background: var(--pink-50);   border-color: var(--pink-100);   color: var(--pink-800); }
+  .tab-badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 7px;
+    border-radius: 99px;
+    background: var(--bg-secondary);
+    color: var(--text-tertiary);
+    min-width: 22px;
+    text-align: center;
+  }
+  .tab-btn.active-purple .tab-badge { background: var(--purple-100); color: var(--purple-800); }
+  .tab-btn.active-teal   .tab-badge { background: var(--teal-100);   color: var(--teal-800); }
+  .tab-btn.active-coral  .tab-badge { background: var(--coral-100);  color: var(--coral-800); }
+  .tab-btn.active-pink   .tab-badge { background: var(--pink-100);   color: var(--pink-800); }
+
+  /* SECTION */
+  .section-panel { display: none; }
+  .section-panel.visible { display: block; }
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-icon svg { width: 20px; height: 20px; }
+  .section-title { font-size: 18px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; }
+  .section-desc { font-size: 13px; color: var(--text-secondary); margin-top: 3px; line-height: 1.5; }
+  .section-count { font-size: 12px; color: var(--text-tertiary); margin-left: auto; white-space: nowrap; padding-top: 3px; }
+
+  /* CHECKLIST */
+  .checklist { display: flex; flex-direction: column; gap: 8px; margin-bottom: 2rem; }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--bg);
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    transition: all 0.15s;
+    box-shadow: var(--shadow-sm);
+  }
+  .check-item:hover { border-color: var(--border-med); background: var(--bg-secondary); }
+  .check-item:focus-visible { outline: 2px solid var(--purple-400); outline-offset: 2px; }
+  .check-item.checked { background: var(--teal-50); border-color: var(--teal-100); }
+  .check-item.na { background: var(--amber-50); border-color: var(--amber-100); opacity: 0.8; }
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border-radius: 7px;
+    border: 1.5px solid var(--border-med);
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    background: var(--bg);
+  }
+  .check-box svg { width: 13px; height: 13px; display: none; }
+  .check-item.checked .check-box { background: var(--teal-400); border-color: var(--teal-400); }
+  .check-item.checked .check-box svg { display: block; stroke: #fff; }
+  .check-item.na .check-box { background: var(--amber-100); border-color: var(--amber-400); }
+  .check-item.na .check-box::after { content: 'N/A'; font-size: 8px; font-weight: 700; color: var(--amber-800); }
+  .check-text { flex: 1; min-width: 0; }
+  .check-label { font-size: 14px; font-weight: 500; color: var(--text-primary); line-height: 1.5; }
+  .check-hint { font-size: 12px; color: var(--text-secondary); margin-top: 4px; line-height: 1.6; }
+  .check-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
+  .check-tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 99px;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+  .tag-must   { background: var(--coral-50);   color: var(--coral-800); }
+  .tag-should { background: var(--purple-50);  color: var(--purple-800); }
+  .tag-good   { background: var(--teal-50);    color: var(--teal-800); }
+  .na-btn {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 2px 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+  }
+  .na-btn:hover { background: var(--bg-secondary); color: var(--text-secondary); }
+
+  /* SUMMARY */
+  .summary-card {
+    background: var(--bg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 1rem;
+  }
+  .summary-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+  .sum-item {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+  }
+  .sum-label { font-size: 11px; color: var(--text-tertiary); margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+  .sum-label svg { width: 13px; height: 13px; stroke: currentColor; }
+  .sum-val { font-size: 22px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.03em; }
+  .sum-sub { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
+
+  .cta-card {
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    font-size: 13px;
+    line-height: 1.7;
+    display: none;
+    margin-top: 1rem;
+  }
+  .cta-card strong { font-weight: 600; }
+
+  .actions-row { display: flex; gap: 8px; margin-top: 1rem; flex-wrap: wrap; }
+  .btn-ghost {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: none;
+    border: 1px solid var(--border-med);
+    border-radius: var(--radius-md);
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-ghost:hover { background: var(--bg-secondary); color: var(--text-primary); }
+  .btn-ghost svg { width: 14px; height: 14px; stroke: currentColor; }
+
+  /* FOOTER */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 1.5rem;
+    margin-top: 2rem;
+  }
+  .footer-inner { max-width: 800px; margin: 0 auto; }
+  .footer-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .footer-brand { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+  .footer-tagline { font-size: 13px; color: var(--text-secondary); font-style: italic; }
+  .footer-links { display: flex; flex-direction: column; gap: 6px; }
+  .footer-links a { font-size: 12px; color: var(--text-secondary); text-decoration: none; }
+  .footer-links a:hover { color: var(--purple-600); text-decoration: underline; }
+  .footer-bottom { font-size: 11px; color: var(--text-tertiary); border-top: 1px solid var(--border); padding-top: 1.25rem; }
+  .footer-wcag { margin-top: 6px; font-size: 11px; color: var(--text-tertiary); }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    padding: 12px 16px;
+    background: var(--bg);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    align-items: center;
+  }
+  .legend-label { font-size: 11px; color: var(--text-tertiary); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; margin-right: 4px; }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 99px; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 2rem 1rem 1.5rem; }
+    .score-panel { padding: 1rem; }
+    .main { padding: 1.25rem 1rem 3rem; }
+    .hero-title { font-size: 1.5rem; }
+    .section-pills { display: none; }
+  }
+
+  @media print {
+    .nav, .score-panel, .tabs-wrap, .na-btn, .actions-row, .footer { display: none; }
+    .section-panel { display: block !important; }
+    body { background: white; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" role="navigation" aria-label="Site navigation">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand" aria-label="Digital For All home">
+      <div class="nav-logo" aria-hidden="true">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="8" r="3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.22 3.22l1.42 1.42M11.36 11.36l1.42 1.42M11.36 4.64l1.42-1.42M3.22 12.78l1.42-1.42" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <div class="nav-name">Digital For All</div>
+        <div class="nav-tag">DMAP Philippines · 2026</div>
+      </div>
+    </a>
+    <div class="nav-score-pill" id="navScore" aria-live="polite">Score: 0 / 0</div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><span></span> Accessibility Advocacy Launch</div>
+    <h1 class="hero-title">Accessibility &amp; Inclusive<br>Communication <em>Self-Audit</em></h1>
+    <p class="hero-desc">A practical checklist for digital marketing professionals in the Philippines to assess their practices against accessibility standards and inclusive communication principles — grounded in WCAG 2.1 AA and the UNCRPD.</p>
+    <div class="hero-meta">
+      <span><strong>39 items</strong> across 4 sections</span>
+      <span><strong>WCAG 2.1 AA</strong> aligned</span>
+      <span><strong>Free</strong> · No login required</span>
+      <span>Initiated by <strong>DMAP Philippines</strong></span>
+    </div>
+  </div>
+</header>
+
+<div class="score-panel" role="region" aria-label="Audit progress">
+  <div class="score-inner">
+    <div class="score-row">
+      <span class="score-label">Overall score</span>
+      <span><span class="score-number" id="scoreNum">0</span> <span class="score-denom" id="scoreDenom">/ 0 applicable</span></span>
+    </div>
+    <div class="bar-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Audit completion">
+      <div class="bar-fill" id="barFill"></div>
+    </div>
+    <div class="verdict-row">
+      <span class="verdict-badge" id="verdictBadge">Start your audit below</span>
+      <div class="section-pills" aria-hidden="true">
+        <span class="section-pill" id="pill-website">Website 0/10</span>
+        <span class="section-pill" id="pill-social">Social 0/9</span>
+        <span class="section-pill" id="pill-campaign">Campaign 0/9</span>
+        <span class="section-pill" id="pill-comms">Comms 0/11</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="main" id="main-content">
+
+  <div class="tabs-wrap" role="tablist" aria-label="Audit sections">
+    <button class="tab-btn active-purple" role="tab" aria-selected="true" aria-controls="section-website" id="tab-website" onclick="switchTab('website')">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Website
+      <span class="tab-badge" id="badge-website">0/10</span>
+    </button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="section-social" id="tab-social" onclick="switchTab('social')">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      Social media
+      <span class="tab-badge" id="badge-social">0/9</span>
+    </button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="section-campaign" id="tab-campaign" onclick="switchTab('campaign')">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+      Campaign
+      <span class="tab-badge" id="badge-campaign">0/9</span>
+    </button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="section-comms" id="tab-comms" onclick="switchTab('comms')">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Inclusive comms
+      <span class="tab-badge" id="badge-comms">0/11</span>
+    </button>
+  </div>
+
+  <div class="legend" role="note" aria-label="Priority level legend">
+    <span class="legend-label">Priority:</span>
+    <span class="legend-item"><span class="legend-dot" style="background:#D85A30"></span> Must do — legal &amp; ethical obligation</span>
+    <span class="legend-item"><span class="legend-dot" style="background:#7F77DD"></span> Should do — strong practice</span>
+    <span class="legend-item"><span class="legend-dot" style="background:#1D9E75"></span> Good practice — leadership level</span>
+  </div>
+
+  <section id="section-website" class="section-panel visible" role="tabpanel" aria-labelledby="tab-website">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--purple-50)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#534AB7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <div>
+        <div class="section-title">Website</div>
+        <div class="section-desc">Technical and structural accessibility of your web presence, aligned with WCAG 2.1 AA</div>
+      </div>
+      <div class="section-count" id="wcount" aria-live="polite">0 of 10 checked</div>
+    </div>
+    <div class="checklist" id="list-website"></div>
+  </section>
+
+  <section id="section-social" class="section-panel" role="tabpanel" aria-labelledby="tab-social">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--teal-50)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </div>
+      <div>
+        <div class="section-title">Social media</div>
+        <div class="section-desc">Accessibility of your organic social content and profiles across platforms</div>
+      </div>
+      <div class="section-count" id="scount" aria-live="polite">0 of 9 checked</div>
+    </div>
+    <div class="checklist" id="list-social"></div>
+  </section>
+
+  <section id="section-campaign" class="section-panel" role="tabpanel" aria-labelledby="tab-campaign">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--coral-50)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#993C1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+      </div>
+      <div>
+        <div class="section-title">Recent campaign</div>
+        <div class="section-desc">Accessibility of a specific campaign from brief to delivery</div>
+      </div>
+      <div class="section-count" id="ccount" aria-live="polite">0 of 9 checked</div>
+    </div>
+    <div class="checklist" id="list-campaign"></div>
+  </section>
+
+  <section id="section-comms" class="section-panel" role="tabpanel" aria-labelledby="tab-comms">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--pink-50)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#993556" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <div>
+        <div class="section-title">Inclusive communication</div>
+        <div class="section-desc">Language, representation, process, and team culture across all content</div>
+      </div>
+      <div class="section-count" id="icount" aria-live="polite">0 of 11 checked</div>
+    </div>
+    <div class="checklist" id="list-comms"></div>
+  </section>
+
+  <div class="summary-card" role="region" aria-label="Score summary">
+    <div class="summary-title">Score by section</div>
+    <div class="summary-grid">
+      <div class="sum-item">
+        <div class="sum-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Website
+        </div>
+        <div class="sum-val" id="wScore">—</div>
+        <div class="sum-sub" id="wScoreSub">not started</div>
+      </div>
+      <div class="sum-item">
+        <div class="sum-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          Social
+        </div>
+        <div class="sum-val" id="sScore">—</div>
+        <div class="sum-sub" id="sScoreSub">not started</div>
+      </div>
+      <div class="sum-item">
+        <div class="sum-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Campaign
+        </div>
+        <div class="sum-val" id="cScore">—</div>
+        <div class="sum-sub" id="cScoreSub">not started</div>
+      </div>
+      <div class="sum-item">
+        <div class="sum-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Incl. comms
+        </div>
+        <div class="sum-val" id="iScore">—</div>
+        <div class="sum-sub" id="iScoreSub">not started</div>
+      </div>
+    </div>
+    <div class="cta-card" id="ctaBox"></div>
+    <div class="actions-row">
+      <button class="btn-ghost" onclick="resetAll()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg>
+        Reset all
+      </button>
+      <button class="btn-ghost" onclick="window.print()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print / save as PDF
+      </button>
+      <button class="btn-ghost" onclick="copyLink()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        <span id="copyBtnText">Copy link</span>
+      </button>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Digital For All</div>
+        <div class="footer-tagline">"Nothing about us without us. No access, no inclusion."</div>
+      </div>
+      <div class="footer-links">
+        <a href="https://dmap.org.ph" target="_blank" rel="noopener">Digital Marketing Association of the Philippines</a>
+        <a href="https://www.w3.org/WAI/WCAG21/quickref/" target="_blank" rel="noopener">WCAG 2.1 Quick Reference (W3C)</a>
+        <a href="https://www.un.org/development/desa/disabilities/convention-on-the-rights-of-persons-with-disabilities.html" target="_blank" rel="noopener">UN Convention on Rights of Persons with Disabilities</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>This checklist is a self-assessment guide and does not constitute legal advice or a formal accessibility certification. Website audit items are based on WCAG 2.1 Level AA success criteria. For formal accessibility audits, consult a qualified accessibility specialist.</p>
+      <p class="footer-wcag">WCAG mapping: 1.1.1 · 1.2.2 · 1.4.3 · 2.1.1 · 4.1.2 · 1.4.4 · 1.3.1 + 3.3.1 · 2.3.1 · 3.1.1 · UNCRPD Art. 9 &amp; 21</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const data = {
+  website: {
+    items: [
+      { label: 'All images have descriptive alt text', hint: 'Every non-decorative image has alt text that conveys its meaning. Decorative images use alt="". (WCAG 1.1.1)', tag: 'must' },
+      { label: 'Videos have accurate closed captions', hint: 'Auto-generated captions are not sufficient — review and correct them before publishing. (WCAG 1.2.2)', tag: 'must' },
+      { label: 'Color contrast meets WCAG AA standard', hint: 'Text-to-background contrast ratio is at least 4.5:1 for normal text, 3:1 for large text. (WCAG 1.4.3)', tag: 'must' },
+      { label: 'Website is fully navigable by keyboard alone', hint: 'Tab through the entire page — every link, button, and form field should be reachable without a mouse. (WCAG 2.1.1)', tag: 'must' },
+      { label: 'Compatible with screen readers', hint: 'Test with NVDA (Windows) or VoiceOver (Mac/iOS). Headings, links, and forms should be announced correctly. (WCAG 4.1.2)', tag: 'must' },
+      { label: 'Font sizes are readable without zooming', hint: 'Body text is at least 16px. Content does not break when browser text size is increased to 200%. (WCAG 1.4.4)', tag: 'must' },
+      { label: 'Forms have clear, visible labels and error messages', hint: 'Labels are always visible (not just placeholders). Error messages say what went wrong and how to fix it. (WCAG 1.3.1 + 3.3.1)', tag: 'should' },
+      { label: 'No content flashes more than 3 times per second', hint: 'Flashing or strobing content can trigger seizures. Avoid or provide a warning and pause option. (WCAG 2.3.1)', tag: 'must' },
+      { label: 'Language is set correctly in the HTML', hint: 'The lang attribute on the html element is set (e.g. lang="en" or lang="fil") so screen readers use the right voice. (WCAG 3.1.1)', tag: 'should' },
+      { label: 'Accessibility statement or contact info is published', hint: 'Users with disabilities can find a way to report barriers or request alternative formats. (UNCRPD Art. 9)', tag: 'good' },
+    ]
+  },
+  social: {
+    items: [
+      { label: 'Image posts include alt text or caption descriptions', hint: 'Manually add alt text to every image on Facebook, Instagram, LinkedIn, and X. Describe what is shown — not just "image" or the brand name.', tag: 'must' },
+      { label: 'Videos are captioned before publishing', hint: 'Do not rely on auto-captions alone. Upload an SRT file or burn captions in — and review for accuracy in Filipino and English.', tag: 'must' },
+      { label: 'Captions are on by default in video posts', hint: 'Many users watch without sound. Captions should appear without the viewer needing to enable them.', tag: 'should' },
+      { label: 'Text in graphics is readable at small screen sizes', hint: 'Avoid font sizes below 14pt in designed assets. Ensure high contrast between text and background colors.', tag: 'must' },
+      { label: 'Hashtags use CamelCase for screen reader clarity', hint: '#DigitalForAll not #digitalforall — screen readers pronounce each word correctly with CamelCase formatting.', tag: 'should' },
+      { label: 'Emojis are used sparingly and placed after text', hint: 'Screen readers announce every emoji. Avoid mid-sentence placement or long emoji strings which disrupt reading flow.', tag: 'should' },
+      { label: 'Audio content has a written transcript or summary', hint: 'For voice notes, podcast clips, and Spaces — provide a text version for deaf and hard-of-hearing followers.', tag: 'must' },
+      { label: 'Persons with disabilities are represented authentically', hint: 'Avoid inspiration porn or tokenism. Feature PWDs as real consumers, creators, and professionals with full lives.', tag: 'good' },
+      { label: 'Person-first language is used consistently', hint: 'Say "person with a disability" — not "handicapped," "differently-abled," "special," or "physically challenged."', tag: 'must' },
+    ]
+  },
+  campaign: {
+    items: [
+      { label: 'Accessibility requirements were in the brief from the start', hint: 'Accessibility must be in the brief, scope, and timeline — not retrofitted after production is complete.', tag: 'must' },
+      { label: 'Creative assets were tested by persons with disabilities', hint: 'Include PWDs in user testing and focus groups during development, not only at the final review stage.', tag: 'should' },
+      { label: 'All videos include captions and audio descriptions', hint: 'Captions serve deaf audiences; audio descriptions narrate visual-only information for blind audiences.', tag: 'must' },
+      { label: 'Print and digital materials meet color contrast standards', hint: 'Campaign visuals, OOH, and digital ads all meet WCAG AA contrast ratios for text and key graphics.', tag: 'must' },
+      { label: 'Campaign landing pages are accessible', hint: 'The page linked in ads must meet the same accessibility criteria — not just the creative itself.', tag: 'must' },
+      { label: 'Messaging avoids pity or hero narratives about disability', hint: 'Check messaging against the social model of disability: disability is not the problem, exclusion is.', tag: 'good' },
+      { label: 'Campaign team included or consulted persons with disabilities', hint: 'Authentic inclusion starts in the room. Was a PWD part of the creative team or consulted as an expert?', tag: 'good' },
+      { label: 'Alternative formats were offered where relevant', hint: 'For major campaigns, consider whether Easy Read, large print, FSL interpretation, or audio versions are needed.', tag: 'good' },
+      { label: 'Campaign results were reviewed for inclusive reach', hint: 'Did your post-campaign analysis consider whether disability communities were reached and engaged?', tag: 'good' },
+    ]
+  },
+  comms: {
+    items: [
+      { label: 'Person-first language is the default across all content', hint: '"Person with a disability" not "disabled person," "handicapped," "differently-abled," or "special needs." Always put the person before the condition.', tag: 'must' },
+      { label: 'Ableist language and slang have been removed from copy', hint: 'Audit recurring phrases. Terms like "blind spot," "tone-deaf," "crippling," "lame," and "crazy" carry ableist connotations even when used casually.', tag: 'must' },
+      { label: 'Content avoids inspiration porn', hint: 'Portraying PWDs primarily as sources of inspiration for non-disabled audiences reduces people to their disability. Feature PWDs as multidimensional people.', tag: 'must' },
+      { label: 'Disability is not used as a metaphor or punchline', hint: 'Avoid metaphors that frame disability as tragedy or weakness (e.g. "paralyzed by indecision," "blind faith"). These reinforce harmful stigma.', tag: 'must' },
+      { label: 'Plain language principles are applied throughout', hint: 'Use short sentences, common words, and active voice. Aim for Grade 8 reading level or below. Jargon-heavy copy excludes people with cognitive and intellectual disabilities.', tag: 'should' },
+      { label: 'Content is reviewed for cultural sensitivity in the Philippine context', hint: 'Disability stigma intersects with Filipino cultural values. Avoid messaging that frames disability as hiya (shame), karma, or divine punishment.', tag: 'must' },
+      { label: 'Filipino Sign Language (FSL) is used for key messages', hint: 'FSL interpretation makes content accessible to the Deaf community. Prioritize this for high-impact announcements and major campaigns.', tag: 'good' },
+      { label: 'Persons with disabilities are co-creators, not just subjects', hint: 'Content developed with PWDs — in research, scripting, talent, or review — is more authentic. "Nothing about us without us."', tag: 'should' },
+      { label: 'Representation spans the full diversity of disability', hint: 'Disability includes physical, sensory, cognitive, intellectual, psychosocial, and hidden conditions. Avoid defaulting only to wheelchair users as the representative image.', tag: 'should' },
+      { label: 'Trigger warnings or content notes are used where appropriate', hint: 'For content referencing trauma, medical procedures, or distressing themes — provide a brief content note so audiences can make informed choices.', tag: 'good' },
+      { label: 'Your team has received disability inclusion training', hint: 'Inclusive communication skills must be built, not assumed. Has your team attended a workshop or briefing on disability-inclusive practice?', tag: 'good' },
+    ]
+  }
+};
+
+const secMeta = {
+  website:  { countId: 'wcount', scoreId: 'wScore', subId: 'wScoreSub', badgeId: 'badge-website',  pillId: 'pill-website',  label: 'Website',  total: 10 },
+  social:   { countId: 'scount', scoreId: 'sScore', subId: 'sScoreSub', badgeId: 'badge-social',   pillId: 'pill-social',   label: 'Social',   total: 9  },
+  campaign: { countId: 'ccount', scoreId: 'cScore', subId: 'cScoreSub', badgeId: 'badge-campaign', pillId: 'pill-campaign', label: 'Campaign', total: 9  },
+  comms:    { countId: 'icount', scoreId: 'iScore', subId: 'iScoreSub', badgeId: 'badge-comms',    pillId: 'pill-comms',    label: 'Comms',    total: 11 }
+};
+
+const tabColors = { website: 'purple', social: 'teal', campaign: 'coral', comms: 'pink' };
+const state = {};
+Object.keys(data).forEach(sec => { state[sec] = data[sec].items.map(() => 'none'); });
+
+function renderList(secKey) {
+  const list = document.getElementById('list-' + secKey);
+  list.innerHTML = '';
+  data[secKey].items.forEach((item, i) => {
+    const s = state[secKey][i];
+    const btn = document.createElement('button');
+    btn.className = 'check-item' + (s === 'checked' ? ' checked' : s === 'na' ? ' na' : '');
+    btn.setAttribute('aria-pressed', s === 'checked' ? 'true' : 'false');
+    btn.setAttribute('aria-label', (s === 'checked' ? 'Checked: ' : s === 'na' ? 'Not applicable: ' : 'Unchecked: ') + item.label);
+
+    const tagMap = { must: ['Must do', 'tag-must'], should: ['Should do', 'tag-should'], good: ['Good practice', 'tag-good'] };
+    const [tagLabel, tagClass] = tagMap[item.tag];
+
+    const checkSvg = `<svg viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polyline points="2,7 5,10 11,3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+    btn.innerHTML = `
+      <div class="check-box" aria-hidden="true">${checkSvg}</div>
+      <div class="check-text">
+        <div class="check-label">${item.label}</div>
+        <div class="check-hint">${item.hint}</div>
+      </div>
+      <div class="check-right">
+        <span class="check-tag ${tagClass}">${tagLabel}</span>
+      </div>
+    `;
+
+    btn.addEventListener('click', () => {
+      state[secKey][i] = state[secKey][i] === 'checked' ? 'none' : 'checked';
+      renderList(secKey);
+      updateScore();
+    });
+
+    const naBtn = document.createElement('button');
+    naBtn.className = 'na-btn';
+    naBtn.textContent = 'N/A';
+    naBtn.setAttribute('aria-label', 'Mark as not applicable: ' + item.label);
+    naBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      state[secKey][i] = state[secKey][i] === 'na' ? 'none' : 'na';
+      renderList(secKey);
+      updateScore();
+    });
+
+    btn.querySelector('.check-right').appendChild(naBtn);
+    list.appendChild(btn);
+  });
+}
+
+function getSectionStats(secKey) {
+  const s = state[secKey];
+  return {
+    applicable: s.filter(x => x !== 'na').length,
+    checked: s.filter(x => x === 'checked').length,
+    total: s.length
+  };
+}
+
+function updateScore() {
+  let totApplicable = 0, totChecked = 0;
+
+  Object.keys(data).forEach(sec => {
+    const { applicable, checked, total } = getSectionStats(sec);
+    const m = secMeta[sec];
+    const na = total - applicable;
+    totApplicable += applicable;
+    totChecked += checked;
+
+    const countEl = document.getElementById(m.countId);
+    if (countEl) countEl.textContent = checked + ' of ' + applicable + ' applicable checked' + (na > 0 ? ' (' + na + ' N/A)' : '');
+
+    const scoreEl = document.getElementById(m.scoreId);
+    const subEl = document.getElementById(m.subId);
+    const badgeEl = document.getElementById(m.badgeId);
+    const pillEl = document.getElementById(m.pillId);
+
+    if (applicable === 0) {
+      if (scoreEl) scoreEl.textContent = '—';
+      if (subEl) subEl.textContent = 'all marked N/A';
+      if (badgeEl) badgeEl.textContent = 'N/A';
+      if (pillEl) pillEl.textContent = m.label + ' N/A';
+    } else {
+      const pct = Math.round(checked / applicable * 100);
+      if (scoreEl) scoreEl.textContent = pct + '%';
+      if (subEl) subEl.textContent = checked + ' of ' + applicable + ' done';
+      if (badgeEl) badgeEl.textContent = checked + '/' + applicable;
+      if (pillEl) pillEl.textContent = m.label + ' ' + checked + '/' + applicable;
+    }
+  });
+
+  const pct = totApplicable > 0 ? Math.round(totChecked / totApplicable * 100) : 0;
+  document.getElementById('scoreNum').textContent = totChecked;
+  document.getElementById('scoreDenom').textContent = ' / ' + totApplicable + ' applicable';
+  document.getElementById('barFill').style.width = (totApplicable > 0 ? pct : 0) + '%';
+  document.querySelector('.bar-track').setAttribute('aria-valuenow', pct);
+  document.getElementById('navScore').textContent = 'Score: ' + totChecked + ' / ' + totApplicable;
+
+  const badge = document.getElementById('verdictBadge');
+  const cta = document.getElementById('ctaBox');
+
+  if (totChecked === 0 && totApplicable > 0) {
+    badge.style.cssText = 'background:var(--bg-secondary);color:var(--text-tertiary)';
+    badge.textContent = 'Audit in progress';
+    cta.style.display = 'none';
+  } else if (pct < 40) {
+    badge.style.cssText = 'background:var(--coral-50);color:var(--coral-800)';
+    badge.textContent = pct + '% — Needs significant work';
+    cta.style.cssText = 'display:block;background:var(--coral-50);border:1px solid var(--coral-100);color:var(--coral-800);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;font-size:13px;line-height:1.7;margin-top:1rem';
+    cta.innerHTML = '<strong>Your next step:</strong> Prioritise all "Must do" items first — these reflect legal obligations under the UNCRPD and basic dignity standards for persons with disabilities. Consider a disability inclusion workshop for your team and reach out to PWD community partners for guidance.';
+  } else if (pct < 70) {
+    badge.style.cssText = 'background:var(--amber-50);color:var(--amber-800)';
+    badge.textContent = pct + '% — Making progress';
+    cta.style.cssText = 'display:block;background:var(--amber-50);border:1px solid var(--amber-100);color:var(--amber-800);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;font-size:13px;line-height:1.7;margin-top:1rem';
+    cta.innerHTML = '<strong>You\'re on your way.</strong> Focus on remaining "Must do" and "Should do" items. Build accessibility and inclusive communication into your standard workflow — not just a one-time audit exercise.';
+  } else if (pct < 90) {
+    badge.style.cssText = 'background:var(--teal-50);color:var(--teal-800)';
+    badge.textContent = pct + '% — Doing well';
+    cta.style.cssText = 'display:block;background:var(--teal-50);border:1px solid var(--teal-100);color:var(--teal-800);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;font-size:13px;line-height:1.7;margin-top:1rem';
+    cta.innerHTML = '<strong>Strong performance.</strong> Keep pushing on the "Good practice" items — they move you from compliance to genuine leadership. Share your learnings with your team and within the DMAP network.';
+  } else {
+    badge.style.cssText = 'background:var(--green-50);color:var(--green-800)';
+    badge.textContent = pct + '% — Accessibility leader';
+    cta.style.cssText = 'display:block;background:var(--green-50);border:1px solid #C0DD97;color:var(--green-800);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;font-size:13px;line-height:1.7;margin-top:1rem';
+    cta.innerHTML = '<strong>Outstanding — you\'re setting the standard.</strong> Consider publishing your accessibility practices publicly, mentoring peers in the industry, and advocating for a national digital accessibility law in the Philippines. Digital For All needs champions like you.';
+  }
+}
+
+function switchTab(sec) {
+  Object.keys(data).forEach(s => {
+    const panel = document.getElementById('section-' + s);
+    const tabBtn = document.getElementById('tab-' + s);
+    const color = tabColors[s];
+    panel.classList.toggle('visible', s === sec);
+    tabBtn.setAttribute('aria-selected', s === sec ? 'true' : 'false');
+    tabBtn.className = 'tab-btn' + (s === sec ? ' active-' + color : '');
+  });
+  document.getElementById('section-' + sec).focus && document.getElementById('section-' + sec).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function resetAll() {
+  if (!confirm('Reset all audit responses? This cannot be undone.')) return;
+  Object.keys(state).forEach(sec => { state[sec] = data[sec].items.map(() => 'none'); });
+  Object.keys(data).forEach(s => renderList(s));
+  updateScore();
+}
+
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    const btn = document.getElementById('copyBtnText');
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = 'Copy link'; }, 2000);
+  }).catch(() => {
+    alert('Copy this URL: ' + window.location.href);
+  });
+}
+
+Object.keys(data).forEach(s => renderList(s));
+updateScore();
+</script>
+</body>
+</html>
