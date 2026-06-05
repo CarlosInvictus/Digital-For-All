@@ -661,7 +661,7 @@
     </div>
     <div class="footer-bottom">
       <p>This checklist is a self-assessment guide and does not constitute legal advice or a formal accessibility certification. Website audit items are based on WCAG 2.1 Level AA success criteria. For formal accessibility audits, consult a qualified accessibility specialist.</p>
-      <p class="footer-wcag">WCAG mapping: 1.1.1 · 1.2.2 · 1.4.3 · 2.1.1 · 4.1.2 · 1.4.4 · 1.3.1 + 3.3.1 · 2.3.1 · 3.1.1 · UNCRPD Art. 9 &amp; 21</p>
+      <p class="footer-wcag">WCAG mapping: 1.1.1 · 1.2.2 · 1.4.3 · 2.1.1 · 4.1.2 · 1.4.4 · 1.3.1 + 3.3.1 · 2.3.1 · 3.1.1 · 1.4.10 · UNCRPD Art. 9 &amp; 21</p>
     </div>
   </div>
 </footer>
@@ -706,6 +706,7 @@ const data = {
       { label: 'Campaign team included or consulted persons with disabilities', hint: 'Authentic inclusion starts in the room. Was a PWD part of the creative team or consulted as an expert?', tag: 'good' },
       { label: 'Alternative formats were offered where relevant', hint: 'For major campaigns, consider whether Easy Read, large print, FSL interpretation, or audio versions are needed.', tag: 'good' },
       { label: 'Campaign results were reviewed for inclusive reach', hint: 'Did your post-campaign analysis consider whether disability communities were reached and engaged?', tag: 'good' },
+      { label: 'Campaign content reflows correctly on mobile without horizontal scrolling', hint: 'All campaign pages and digital assets must remain readable when zoomed to 400% or on small screens — without requiring horizontal scrolling. This serves users with low vision who rely on zoom. (WCAG 1.4.10 · UNCRPD Art. 9)', tag: 'must' },
     ]
   },
   comms: {
@@ -728,7 +729,7 @@ const data = {
 const secMeta = {
   website:  { countId: 'wcount', scoreId: 'wScore', subId: 'wScoreSub', badgeId: 'badge-website',  pillId: 'pill-website',  label: 'Website',  total: 10 },
   social:   { countId: 'scount', scoreId: 'sScore', subId: 'sScoreSub', badgeId: 'badge-social',   pillId: 'pill-social',   label: 'Social',   total: 9  },
-  campaign: { countId: 'ccount', scoreId: 'cScore', subId: 'cScoreSub', badgeId: 'badge-campaign', pillId: 'pill-campaign', label: 'Campaign', total: 9  },
+  campaign: { countId: 'ccount', scoreId: 'cScore', subId: 'cScoreSub', badgeId: 'badge-campaign', pillId: 'pill-campaign', label: 'Campaign', total: 10 },
   comms:    { countId: 'icount', scoreId: 'iScore', subId: 'iScoreSub', badgeId: 'badge-comms',    pillId: 'pill-comms',    label: 'Comms',    total: 11 }
 };
 
