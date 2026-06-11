@@ -362,7 +362,7 @@
     margin-bottom: 1rem;
   }
   .summary-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem; }
-  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
   .sum-item {
     background: var(--bg-secondary);
     border-radius: var(--radius-md);
@@ -371,8 +371,30 @@
   }
   .sum-label { font-size: 11px; color: var(--text-tertiary); margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
   .sum-label svg { width: 13px; height: 13px; stroke: currentColor; }
-  .sum-val { font-size: 22px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.03em; }
+  .sum-val { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px; }
   .sum-sub { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
+  .sum-desc { font-size: 11px; line-height: 1.55; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+
+  /* Per-level tile colours */
+  .sum-item-notstarted { background: var(--bg-secondary);  border-color: var(--border); }
+  .sum-item-notstarted .sum-val  { color: var(--text-tertiary); }
+  .sum-item-notstarted .sum-desc { color: var(--text-tertiary); }
+
+  .sum-item-awareness  { background: var(--amber-50);  border-color: var(--amber-100); }
+  .sum-item-awareness  .sum-val  { color: var(--white); }
+  .sum-item-awareness  .sum-desc { color: var(--white); }
+
+  .sum-item-practicing { background: var(--purple-50); border-color: var(--purple-100); }
+  .sum-item-practicing .sum-val  { color: var(--white); }
+  .sum-item-practicing .sum-desc { color: var(--white); }
+
+  .sum-item-advancing  { background: var(--teal-50);   border-color: var(--teal-100); }
+  .sum-item-advancing  .sum-val  { color: var(--white); }
+  .sum-item-advancing  .sum-desc { color: var(--white); }
+
+  .sum-item-leading    { background: var(--green-50);  border-color: #C0DD97; }
+  .sum-item-leading    .sum-val  { color: var(--white); }
+  .sum-item-leading    .sum-desc { color: var(--white); }
 
   .cta-card {
     border-radius: var(--radius-lg);
@@ -449,6 +471,39 @@
     .section-panel { display: block !important; }
     body { background: white; }
   }
+
+  /* ── MATURITY LABELS ── */
+  .maturity-overall {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    margin-left: auto;
+    flex-shrink: 0;
+    transition: color 0.3s;
+  }
+  .section-maturity {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 9px;
+    border-radius: 99px;
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+    margin-left: auto;
+    flex-shrink: 0;
+    transition: all 0.25s;
+  }
+  /* States */
+  .ml-notstarted { background: var(--bg-secondary);  color: var(--text-tertiary);  border: 1px solid var(--border); }
+  .ml-awareness  { background: var(--amber-50);      color: var(--white);      border: 1px solid var(--amber-100); }
+  .ml-practicing { background: var(--purple-50);     color: var(--white);     border: 1px solid var(--purple-100); }
+  .ml-advancing  { background: var(--teal-50);       color: var(--white);       border: 1px solid var(--teal-100); }
+  .ml-leading    { background: var(--green-50);      color: var(--white);      border: 1px solid #C0DD97; }
+  /* Bar fill colours per level */
+  .bar-fill-awareness  { background: var(--amber-400) !important; }
+  .bar-fill-practicing { background: var(--purple-400) !important; }
+  .bar-fill-advancing  { background: var(--teal-400) !important; }
+  .bar-fill-leading    { background: #5A9E27 !important; }
 
   /* ── EXAMPLE POPOVER ── */
   .example-btn {
@@ -631,7 +686,7 @@
         <div class="nav-tag">Invictus PH · 2026</div>
       </div>
     </a>
-    <div class="nav-score-pill" id="navScore" aria-live="polite">Score: 0 / 0</div>
+    <div class="nav-score-pill" id="navScore" aria-live="polite">Not started</div>
   </div>
 </nav>
 
@@ -652,8 +707,8 @@
 <div class="score-panel" role="region" aria-label="Audit progress">
   <div class="score-inner">
     <div class="score-row">
-      <span class="score-label">Overall score</span>
-      <span><span class="score-number" id="scoreNum">0</span> <span class="score-denom" id="scoreDenom">/ 0 applicable</span></span>
+      <span class="score-label">Overall level</span>
+      <span class="maturity-overall" id="overallMaturityLabel" aria-live="polite">Not started</span>
     </div>
     <div class="bar-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Audit completion">
       <div class="bar-fill" id="barFill"></div>
@@ -661,10 +716,10 @@
     <div class="verdict-row">
       <span class="verdict-badge" id="verdictBadge">Start your audit below</span>
       <div class="section-pills" aria-hidden="true">
-        <span class="section-pill" id="pill-website">Website 0/10</span>
-        <span class="section-pill" id="pill-social">Social 0/9</span>
-        <span class="section-pill" id="pill-campaign">Campaign 0/9</span>
-        <span class="section-pill" id="pill-comms">Comms 0/11</span>
+        <span class="section-pill" id="pill-website">Website · –</span>
+        <span class="section-pill" id="pill-social">Social · –</span>
+        <span class="section-pill" id="pill-campaign">Campaign · –</span>
+        <span class="section-pill" id="pill-comms">Comms · –</span>
       </div>
     </div>
   </div>
@@ -712,6 +767,7 @@
         <div class="section-desc">Technical and structural accessibility of your web presence, aligned with WCAG 2.1 AA</div>
       </div>
       <div class="section-count" id="wcount" aria-live="polite">0 of 10 checked</div>
+      <span class="section-maturity ml-notstarted" id="maturity-website" aria-live="polite">Not started</span>
     </div>
     <div class="checklist" id="list-website"></div>
   </section>
@@ -726,6 +782,7 @@
         <div class="section-desc">Accessibility of your organic social content and profiles across platforms</div>
       </div>
       <div class="section-count" id="scount" aria-live="polite">0 of 9 checked</div>
+      <span class="section-maturity ml-notstarted" id="maturity-social" aria-live="polite">Not started</span>
     </div>
     <div class="checklist" id="list-social"></div>
   </section>
@@ -740,6 +797,7 @@
         <div class="section-desc">Accessibility of a specific campaign from brief to delivery</div>
       </div>
       <div class="section-count" id="ccount" aria-live="polite">0 of 9 checked</div>
+      <span class="section-maturity ml-notstarted" id="maturity-campaign" aria-live="polite">Not started</span>
     </div>
     <div class="checklist" id="list-campaign"></div>
   </section>
@@ -754,12 +812,13 @@
         <div class="section-desc">Language, representation, process, and team culture across all content</div>
       </div>
       <div class="section-count" id="icount" aria-live="polite">0 of 11 checked</div>
+      <span class="section-maturity ml-notstarted" id="maturity-comms" aria-live="polite">Not started</span>
     </div>
     <div class="checklist" id="list-comms"></div>
   </section>
 
   <div class="summary-card" role="region" aria-label="Score summary">
-    <div class="summary-title">Score by section</div>
+    <div class="summary-title">Level by section</div>
     <div class="summary-grid">
       <div class="sum-item">
         <div class="sum-label">
@@ -1335,72 +1394,223 @@ function getSectionStats(secKey) {
   };
 }
 
+/* ══════════════════════════════════════════════════════
+   MATURITY SCORING SYSTEM
+   Points: Must = 3, Should = 2, Good = 1
+   
+   Per-section levels (gated logic):
+   - Not started : 0 points
+   - Awareness   : points > 0, but not all applicable Musts checked
+   - Practicing  : ALL applicable Musts checked (hard gate)
+   - Advancing   : All Musts + ALL applicable Shoulds checked
+   - Leading     : All Musts + All Shoulds + ≥50% applicable Good Practice checked
+   
+   Overall level : gated by weakest section
+══════════════════════════════════════════════════════ */
+
+const POINTS = { must: 3, should: 2, good: 1 };
+
+const LEVEL_ORDER = ['notstarted', 'awareness', 'practicing', 'advancing', 'leading'];
+
+const LEVEL_META = {
+  notstarted: {
+    label: 'Not started',
+    cls: 'ml-notstarted',
+    sumItemCls: 'sum-item-notstarted',
+    barCls: '',
+    desc: '',
+    verdictStyle: 'background:var(--bg-secondary);color:var(--text-tertiary)',
+    verdictText: 'Start your audit below',
+    ctaStyle: '',
+    ctaHtml: '',
+  },
+  awareness: {
+    label: 'Awareness',
+    cls: 'ml-awareness',
+    sumItemCls: 'sum-item-awareness',
+    barCls: 'bar-fill-awareness',
+    desc: "You're making a start. Some accessibility practices are in place, but there are still Must Do items unchecked. These aren't optional — they reflect the legal rights of Persons with Disability under the UNCRPD. Prioritise these first.",
+    verdictStyle: 'background:var(--amber-50);color:var(--white)',
+    verdictText: 'Awareness — must-dos still outstanding',
+    ctaStyle: 'display:block;background:var(--amber-50);border:1px solid var(--amber-100);color:var(--white);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;font-size:13px;line-height:1.7;margin-top:1rem',
+    ctaHtml: '<strong>Your next step:</strong> Focus on the "Must do" items first — these are legal and ethical obligations under the UNCRPD and WCAG 2.1 AA. You cannot reach Practicing until all applicable Musts are checked. Consider a disability inclusion workshop to help your team understand the why behind each requirement.',
+  },
+  practicing: {
+    label: 'Practicing',
+    cls: 'ml-practicing',
+    sumItemCls: 'sum-item-practicing',
+    barCls: 'bar-fill-practicing',
+    desc: "You're meeting the baseline. All your legal and ethical obligations are covered — that's a meaningful commitment to the rights of Persons with Disability. Now build on it by working toward the Should Do items.",
+    verdictStyle: 'background:var(--purple-50);color:var0(--white)',
+    verdictText: 'Practicing — baseline obligations met',
+    ctaStyle: 'display:block;background:var(--purple-50);border:1px solid var(--purple-100);color:var(--white);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;font-size:13px;line-height:1.7;margin-top:1rem',
+    ctaHtml: '<strong>You\'ve cleared the baseline.</strong> All critical obligations are in place — that matters. Now build on this by tackling the "Should do" items, which represent strong, consistent practice. Integrate accessibility into your standard workflows rather than treating it as a one-time exercise.',
+  },
+  advancing: {
+    label: 'Advancing',
+    cls: 'ml-advancing',
+    sumItemCls: 'sum-item-advancing',
+    barCls: 'bar-fill-advancing',
+    desc: "You're going beyond compliance. Your team is doing what's required and what's recommended. The Good Practice items are what separate organisations that follow the rules from those that genuinely lead on inclusion.",
+    verdictStyle: 'background:var(--teal-50);color:var(--white)',
+    verdictText: 'Advancing — strong, consistent practice',
+    ctaStyle: 'display:block;background:var(--teal-50);border:1px solid var(--teal-100);color:var(--white);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;font-size:13px;line-height:1.7;margin-top:1rem',
+    ctaHtml: '<strong>You\'re doing well beyond the minimum.</strong> Musts and Shoulds are solid. The "Good practice" items are what separate compliance from genuine leadership — they show Persons with Disability that you\'re not just avoiding harm, you\'re actively creating space for inclusion.',
+  },
+  leading: {
+    label: 'Leading',
+    cls: 'ml-leading',
+    sumItemCls: 'sum-item-leading',
+    barCls: 'bar-fill-leading',
+    desc: "You're setting the standard. Your team is doing everything required, recommended, and more. You're not just avoiding harm — you're actively creating space for Persons with Disability to participate fully. Share what you're doing. Others need to see it's possible.",
+    verdictStyle: 'background:var(--green-50);color:var(--white)',
+    verdictText: 'Leading — setting the standard',
+    ctaStyle: 'display:block;background:var(--green-50);border:1px solid #C0DD97;color:var(--white);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;font-size:13px;line-height:1.7;margin-top:1rem',
+    ctaHtml: '<strong>Outstanding — you\'re setting the standard.</strong> Consider publishing your accessibility practices publicly, mentoring peers in the industry, and advocating for a national digital accessibility law in the Philippines. Digital For All needs champions like you.',
+  },
+};
+
+function getSectionMaturity(secKey) {
+  const items = data[secKey].items;
+  const sState = state[secKey];
+
+  // Separate applicable items by tag
+  const musts   = items.map((it, i) => ({ tag: it.tag, checked: sState[i] === 'checked', na: sState[i] === 'na' })).filter(x => x.tag === 'must'   && !x.na);
+  const shoulds  = items.map((it, i) => ({ tag: it.tag, checked: sState[i] === 'checked', na: sState[i] === 'na' })).filter(x => x.tag === 'should' && !x.na);
+  const goods    = items.map((it, i) => ({ tag: it.tag, checked: sState[i] === 'checked', na: sState[i] === 'na' })).filter(x => x.tag === 'good'   && !x.na);
+
+  const totalApplicable = musts.length + shoulds.length + goods.length;
+  if (totalApplicable === 0) return 'notstarted'; // all N/A
+
+  const checkedMusts  = musts.filter(x => x.checked).length;
+  const checkedShoulds = shoulds.filter(x => x.checked).length;
+  const checkedGoods  = goods.filter(x => x.checked).length;
+  const totalChecked  = checkedMusts + checkedShoulds + checkedGoods;
+
+  if (totalChecked === 0) return 'notstarted';
+
+  // Hard gate: Practicing requires ALL applicable Musts
+  if (checkedMusts < musts.length) return 'awareness';
+
+  // All Musts done — check Shoulds
+  if (checkedShoulds < shoulds.length) return 'practicing';
+
+  // All Musts + Shoulds done — check ≥50% of Goods
+  if (goods.length === 0 || checkedGoods / goods.length >= 0.5) return 'leading';
+
+  return 'advancing';
+}
+
+function getOverallMaturity(sectionLevels) {
+  // Gated: overall = weakest section
+  let weakestIdx = LEVEL_ORDER.length - 1;
+  sectionLevels.forEach(lvl => {
+    const idx = LEVEL_ORDER.indexOf(lvl);
+    if (idx < weakestIdx) weakestIdx = idx;
+  });
+  return LEVEL_ORDER[weakestIdx];
+}
+
+function applyMaturityBadge(elId, level) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  const m = LEVEL_META[level];
+  el.textContent = m.label;
+  // Swap class
+  LEVEL_ORDER.forEach(l => el.classList.remove(LEVEL_META[l].cls));
+  el.classList.add(m.cls);
+}
+
 function updateScore() {
-  let totApplicable = 0, totChecked = 0;
+  const sectionLevels = [];
 
   Object.keys(data).forEach(sec => {
-    const { applicable, checked, total } = getSectionStats(sec);
+    const items = data[sec].items;
+    const sState = state[sec];
     const m = secMeta[sec];
-    const na = total - applicable;
-    totApplicable += applicable;
-    totChecked += checked;
 
+    const applicable = sState.filter(x => x !== 'na').length;
+    const checked    = sState.filter(x => x === 'checked').length;
+    const na         = items.length - applicable;
+
+    // Section item count line
     const countEl = document.getElementById(m.countId);
     if (countEl) countEl.textContent = checked + ' of ' + applicable + ' applicable checked' + (na > 0 ? ' (' + na + ' N/A)' : '');
 
-    const scoreEl = document.getElementById(m.scoreId);
-    const subEl = document.getElementById(m.subId);
-    const badgeEl = document.getElementById(m.badgeId);
-    const pillEl = document.getElementById(m.pillId);
+    // Section maturity
+    const secLevel = getSectionMaturity(sec);
+    sectionLevels.push(secLevel);
+    const secMeta2 = LEVEL_META[secLevel];
 
-    if (applicable === 0) {
-      if (scoreEl) scoreEl.textContent = '—';
-      if (subEl) subEl.textContent = 'all marked N/A';
-      if (badgeEl) badgeEl.textContent = 'N/A';
-      if (pillEl) pillEl.textContent = m.label + ' N/A';
-    } else {
-      const pct = Math.round(checked / applicable * 100);
-      if (scoreEl) scoreEl.textContent = pct + '%';
-      if (subEl) subEl.textContent = checked + ' of ' + applicable + ' done';
-      if (badgeEl) badgeEl.textContent = checked + '/' + applicable;
-      if (pillEl) pillEl.textContent = m.label + ' ' + checked + '/' + applicable;
+    // Section header badge
+    applyMaturityBadge('maturity-' + sec, secLevel);
+
+    // Tab badge (keep showing checked/applicable count — useful at a glance)
+    const badgeEl = document.getElementById(m.badgeId);
+    if (badgeEl) badgeEl.textContent = applicable > 0 ? checked + '/' + applicable : 'N/A';
+
+    // Sticky pills — show section name + level
+    const pillEl = document.getElementById(m.pillId);
+    if (pillEl) pillEl.textContent = m.label + ' · ' + secMeta2.label;
+
+    // Summary card: show level as the big value, checked/applicable as sub, desc below
+    const scoreEl = document.getElementById(m.scoreId);
+    const subEl   = document.getElementById(m.subId);
+    if (scoreEl) scoreEl.textContent = secMeta2.label;
+    if (subEl)   subEl.textContent   = applicable > 0 ? checked + ' of ' + applicable + ' done' : 'all N/A';
+
+    // Colour the tile and add/update description
+    const tileEl = scoreEl && scoreEl.closest('.sum-item');
+    if (tileEl) {
+      LEVEL_ORDER.forEach(l => tileEl.classList.remove('sum-item-' + l));
+      tileEl.classList.add('sum-item-' + secLevel);
+      let descEl = tileEl.querySelector('.sum-desc');
+      if (!descEl) {
+        descEl = document.createElement('p');
+        descEl.className = 'sum-desc';
+        tileEl.appendChild(descEl);
+      }
+      descEl.textContent = secMeta2.desc || '';
+      descEl.style.display = secMeta2.desc ? '' : 'none';
     }
   });
 
-  const pct = totApplicable > 0 ? Math.round(totChecked / totApplicable * 100) : 0;
-  document.getElementById('scoreNum').textContent = totChecked;
-  document.getElementById('scoreDenom').textContent = ' / ' + totApplicable + ' applicable';
-  document.getElementById('barFill').style.width = (totApplicable > 0 ? pct : 0) + '%';
+  // Overall maturity (gated by weakest)
+  const overallLevel = getOverallMaturity(sectionLevels);
+  const overallMeta  = LEVEL_META[overallLevel];
+
+  // Nav pill
+  document.getElementById('navScore').textContent = overallMeta.label;
+
+  // Sticky panel overall label
+  const overallLabelEl = document.getElementById('overallMaturityLabel');
+  if (overallLabelEl) {
+    overallLabelEl.textContent = overallMeta.label;
+    LEVEL_ORDER.forEach(l => overallLabelEl.classList.remove(LEVEL_META[l].cls));
+    overallLabelEl.classList.add(overallMeta.cls);
+  }
+
+  // Progress bar — width based on weighted points, colour from level
+  const allItems    = Object.keys(data).flatMap(sec => data[sec].items.map((it, i) => ({ tag: it.tag, st: state[sec][i] })));
+  const maxPts      = allItems.filter(x => x.st !== 'na').reduce((a, x) => a + POINTS[x.tag], 0);
+  const earnedPts   = allItems.filter(x => x.st === 'checked').reduce((a, x) => a + POINTS[x.tag], 0);
+  const pct         = maxPts > 0 ? Math.round(earnedPts / maxPts * 100) : 0;
+
+  const barEl = document.getElementById('barFill');
+  barEl.style.width = pct + '%';
+  barEl.className = 'bar-fill' + (overallMeta.barCls ? ' ' + overallMeta.barCls : '');
   document.querySelector('.bar-track').setAttribute('aria-valuenow', pct);
-  document.getElementById('navScore').textContent = 'Score: ' + totChecked + ' / ' + totApplicable;
 
+  // Verdict badge + CTA
   const badge = document.getElementById('verdictBadge');
-  const cta = document.getElementById('ctaBox');
-
-  if (totChecked === 0 && totApplicable > 0) {
-    badge.style.cssText = 'background:var(--bg-secondary);color:var(--text-tertiary)';
-    badge.textContent = 'Audit in progress';
-    cta.style.display = 'none';
-  } else if (pct < 40) {
-    badge.style.cssText = 'background:var(--coral-50);color:var(--coral-800)';
-    badge.textContent = pct + '% — Needs significant work';
-    cta.style.cssText = 'display:block;background:var(--coral-50);border:1px solid var(--coral-100);color:var(--coral-800);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;font-size:13px;line-height:1.7;margin-top:1rem';
-    cta.innerHTML = '<strong>Your next step:</strong> Prioritise all "Must do" items first — these reflect legal obligations under the UNCRPD and basic dignity standards for persons with disabilities. Consider a disability inclusion workshop for your team and reach out to the Persons with Disability community partners for guidance.';
-  } else if (pct < 70) {
-    badge.style.cssText = 'background:var(--amber-50);color:var(--amber-800)';
-    badge.textContent = pct + '% — Making progress';
-    cta.style.cssText = 'display:block;background:var(--amber-50);border:1px solid var(--amber-100);color:var(--amber-800);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;font-size:13px;line-height:1.7;margin-top:1rem';
-    cta.innerHTML = '<strong>You\'re on your way.</strong> Focus on remaining "Must do" and "Should do" items. Build accessibility and inclusive communication into your standard workflow — not just a one-time audit exercise.';
-  } else if (pct < 90) {
-    badge.style.cssText = 'background:var(--teal-50);color:var(--teal-800)';
-    badge.textContent = pct + '% — Doing well';
-    cta.style.cssText = 'display:block;background:var(--teal-50);border:1px solid var(--teal-100);color:var(--teal-800);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;font-size:13px;line-height:1.7;margin-top:1rem';
-    cta.innerHTML = '<strong>Strong performance.</strong> Keep pushing on the "Good practice" items — they move you from compliance to genuine leadership. Share your learnings with your team.';
+  const cta   = document.getElementById('ctaBox');
+  badge.style.cssText = overallMeta.verdictStyle;
+  badge.textContent   = overallMeta.verdictText;
+  if (overallMeta.ctaHtml) {
+    cta.style.cssText = overallMeta.ctaStyle;
+    cta.innerHTML     = overallMeta.ctaHtml;
   } else {
-    badge.style.cssText = 'background:var(--green-50);color:var(--green-800)';
-    badge.textContent = pct + '% — Accessibility leader';
-    cta.style.cssText = 'display:block;background:var(--green-50);border:1px solid #C0DD97;color:var(--green-800);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;font-size:13px;line-height:1.7;margin-top:1rem';
-    cta.innerHTML = '<strong>Outstanding — you\'re setting the standard.</strong> Consider publishing your accessibility practices publicly, mentoring peers in the industry, and advocating for a national digital accessibility law in the Philippines. Digital For All needs champions like you.';
+    cta.style.display = 'none';
   }
 }
 
