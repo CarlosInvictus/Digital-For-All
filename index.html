@@ -904,15 +904,15 @@ const examples = {
       doText:   'Body text set to 16px minimum. Page still readable and usable when browser zoom is set to 200%.',
       dontText: 'Text set to 11–12px. Page layout breaks or text overflows at 200% zoom.',
     },
-    // 6 — Forms have clear, visible labels and error messages
-    {
-      do:   { src: '', alt: 'Form field with a clear visible label "Email address" above the input, and a helpful error message reading "Please enter a valid email address"', caption: '✅ Label always visible, error is specific' },
-      dont: { src: '', alt: 'Form field using only a greyed-out placeholder text that disappears when typing begins, with no visible label', caption: '❌ Placeholder as label — disappears on input' },
-    },
-    // 7 — No content flashes more than 3 times per second
+    // 6 — No content flashes more than 3 times per second
     {
       doText:   'Animations are subtle and slow. Any flashing effect is below 3 Hz, or a pause/stop option is provided.',
       dontText: 'Rapid strobing animations, GIFs, or video intros that flash quickly — can trigger seizures in photosensitive users.',
+    },
+    // 7 — Forms have clear, visible labels and error messages
+    {
+      do:   { src: '', alt: 'Form field with a clear visible label "Email address" above the input, and a helpful error message reading "Please enter a valid email address"', caption: '✅ Label always visible, error is specific' },
+      dont: { src: '', alt: 'Form field using only a greyed-out placeholder text that disappears when typing begins, with no visible label', caption: '❌ Placeholder as label — disappears on input' },
     },
     // 8 — Language is set correctly in the HTML
     {
@@ -936,40 +936,40 @@ const examples = {
       doText:   'SRT file uploaded or captions burned in. Filipino and English terms reviewed for accuracy before publishing.',
       dontText: 'Publishing with auto-captions only — especially risky for Filipino, Taglish, and proper nouns.',
     },
-    // 2 — Captions are on by default in video posts
-    {
-      doText:   'Captions display immediately when video starts playing, without the viewer needing to tap a settings icon.',
-      dontText: 'Captions exist but are hidden by default — many viewers never enable them, especially on mobile.',
-    },
-    // 3 — Text in graphics is readable at small screen sizes
+    // 2 — Text in graphics is readable at small screen sizes
     {
       do:   { src: '', alt: 'Social media graphic with large, high-contrast text clearly readable on a small phone screen', caption: '✅ 16pt+ text, strong contrast' },
       dont: { src: '', alt: 'Social media graphic with small decorative text that is illegible when viewed on a phone', caption: '❌ Small text — illegible on mobile' },
     },
-    // 4 — Hashtags use CamelCase for screen reader clarity
-    {
-      doText:   '#DigitalForAll #DapatPWEDE #InclusiveMarketing — screen readers say each word correctly.',
-      dontText: '#digitalforall #dapatpwede #inclusivemarketing — screen readers read it as one long unrecognised word.',
-    },
-    // 5 — Emojis are used sparingly and placed after text
-    {
-      doText:   '"Join our webinar on digital accessibility. Register now ➡️" — emoji placed at the end, one per thought.',
-      dontText: '"🎉🎊 Join 🙌 our 💻 webinar 🎉 on 🔥 accessibility!! 🙏💪" — screen reader announces every emoji in sequence.',
-    },
-    // 6 — Audio content has a written transcript or summary
+    // 3 — Audio content has a written transcript or summary
     {
       doText:   'Podcast clip shared with a 3–5 sentence text summary in the caption, plus a link to the full transcript.',
       dontText: 'Voice note or podcast clip posted with no text context — deaf and hard-of-hearing followers get nothing.',
     },
-    // 7 — Persons with disabilities are represented authentically
-    {
-      doText:   'PWD featured as a professional, consumer, or expert — shown doing their job, pursuing interests, living fully.',
-      dontText: '"Inspiration porn" — PWD shown only for emotional impact, framed as brave or special for ordinary actions.',
-    },
-    // 8 — Person-first language is used consistently
+    // 4 — Person-first language is used consistently
     {
       doText:   '"Person with a disability," "person who is blind," "person with Down syndrome."',
       dontText: '"Handicapped," "differently-abled," "special needs," "wheelchair-bound," "suffers from."',
+    },
+    // 5 — Captions are on by default in video posts
+    {
+      doText:   'Captions display immediately when video starts playing, without the viewer needing to tap a settings icon.',
+      dontText: 'Captions exist but are hidden by default — many viewers never enable them, especially on mobile.',
+    },
+    // 6 — Hashtags use CamelCase for screen reader clarity
+    {
+      doText:   '#DigitalForAll #DapatPWEDE #InclusiveMarketing — screen readers say each word correctly.',
+      dontText: '#digitalforall #dapatpwede #inclusivemarketing — screen readers read it as one long unrecognised word.',
+    },
+    // 7 — Emojis are used sparingly and placed after text
+    {
+      doText:   '"Join our webinar on digital accessibility. Register now ➡️" — emoji placed at the end, one per thought.',
+      dontText: '"🎉🎊 Join 🙌 our 💻 webinar 🎉 on 🔥 accessibility!! 🙏💪" — screen reader announces every emoji in sequence.',
+    },
+    // 8 — Persons with disabilities are represented authentically
+    {
+      doText:   'PWD featured as a professional, consumer, or expert — shown doing their job, pursuing interests, living fully.',
+      dontText: '"Inspiration porn" — PWD shown only for emotional impact, framed as brave or special for ordinary actions.',
     },
   ],
   campaign: [
@@ -978,10 +978,10 @@ const examples = {
       doText:   'Brief includes: caption requirements, contrast specs, accessible PDF formats, and testing with PWD community.',
       dontText: 'Accessibility treated as a post-production checklist item — costly to retrofit and often incomplete.',
     },
-    // 1 — Creative assets were tested by persons with disabilities
+    // 1 — Campaign content reflows correctly on mobile without horizontal scrolling
     {
-      doText:   'PWD reviewers included in focus groups during concept and pre-production stages, with feedback documented.',
-      dontText: 'Assets shared with PWD only at final approval stage — no time to act on feedback.',
+      doText:   'Campaign page is fully usable at 400% zoom on mobile — content stacks vertically, no horizontal scrolling needed.',
+      dontText: 'At 200% zoom, content is cut off and requires horizontal scrolling — excludes low-vision users who rely on zoom.',
     },
     // 2 — All videos include captions and audio descriptions
     {
@@ -998,30 +998,30 @@ const examples = {
       doText:   'Landing page passes the same WCAG AA checks as the main site — keyboard nav, alt text, form labels, contrast.',
       dontText: 'A beautiful, accessible campaign ad links to a microsite that was never accessibility-tested.',
     },
-    // 5 — Messaging avoids pity or hero narratives about disability
+    // 5 — Creative assets were tested by persons with disabilities
+    {
+      doText:   'PWD reviewers included in focus groups during concept and pre-production stages, with feedback documented.',
+      dontText: 'Assets shared with PWD only at final approval stage — no time to act on feedback.',
+    },
+    // 6 — Messaging avoids pity or hero narratives about disability
     {
       doText:   'Messaging centres on inclusion, access, and rights. PWD shown as stakeholders demanding equal participation.',
       dontText: '"Inspiring story of how she overcame her disability to achieve…" — frames disability as the problem, not exclusion.',
     },
-    // 6 — Campaign team included or consulted persons with disabilities
+    // 7 — Campaign team included or consulted persons with disabilities
     {
       doText:   'A PWD advocate was part of the creative team, or a formal consultation with a disability organisation was held.',
       dontText: 'Campaign about disability produced entirely by a team with no lived experience or community input.',
     },
-    // 7 — Alternative formats were offered where relevant
+    // 8 — Alternative formats were offered where relevant
     {
       doText:   'Major launch includes: Easy Read version, large print PDF, FSL-interpreted video, and audio version.',
       dontText: 'Campaign materials exist only as standard PDFs with no accessible alternatives offered.',
     },
-    // 8 — Campaign results were reviewed for inclusive reach
+    // 9 — Campaign results were reviewed for inclusive reach
     {
       doText:   'Post-campaign report includes reach analysis for disability communities and accessibility-related engagement.',
       dontText: 'Campaign debrief focuses only on broad reach metrics with no analysis of whether PWD audiences were included.',
-    },
-    // 9 — Campaign content reflows correctly on mobile without horizontal scrolling
-    {
-      doText:   'Campaign page is fully usable at 400% zoom on mobile — content stacks vertically, no horizontal scrolling needed.',
-      dontText: 'At 200% zoom, content is cut off and requires horizontal scrolling — excludes low-vision users who rely on zoom.',
     },
   ],
   comms: [
@@ -1045,40 +1045,40 @@ const examples = {
       doText:   '"The team was struggling to move forward." "We were overly cautious."',
       dontText: '"Paralyzed by indecision." "Blind faith in the strategy." "That idea is lame."',
     },
-    // 4 — Plain language principles applied
-    {
-      doText:   'Short sentences. Common words. Active voice. Reading level Grade 8 or below. Key info in the first sentence.',
-      dontText: '"In order to facilitate the operationalisation of inclusive communication frameworks, stakeholders are encouraged to…"',
-    },
-    // 5 — Content reviewed for cultural sensitivity
+    // 4 — Content reviewed for cultural sensitivity
     {
       doText:   'Messaging reviewed by a Filipino disability advocate. Avoids framing disability as spiritual punishment or hiya.',
       dontText: '"God gave her this challenge for a reason." "Bagay naman sa kanya." — harmful cultural stigma in disguise.',
     },
-    // 6 — Filipino Sign Language (FSL) used for key messages
+    // 5 — Plain language principles applied
     {
-      doText:   'Major announcements include an FSL interpreter in-frame, with clear sightlines and adequate screen size.',
-      dontText: 'FSL interpreter placed in a tiny corner box, partially obscured, or removed during post-production editing.',
+      doText:   'Short sentences. Common words. Active voice. Reading level Grade 8 or below. Key info in the first sentence.',
+      dontText: '"In order to facilitate the operationalisation of inclusive communication frameworks, stakeholders are encouraged to…"',
     },
-    // 7 — Persons with disabilities are co-creators
+    // 6 — Persons with disabilities are co-creators
     {
       doText:   'PWD community members involved in research, scripting, talent selection, or review of final content.',
       dontText: 'Content about PWD created entirely by non-disabled team, without consultation — "about us, without us."',
     },
-    // 8 — Representation spans full diversity of disability
+    // 7 — Representation spans full diversity of disability
     {
       doText:   'Visual and written representation includes physical, sensory, cognitive, psychosocial, and hidden disabilities.',
       dontText: 'All disability representation defaults to a single wheelchair-using individual — one narrow slice of a broad spectrum.',
     },
-    // 9 — Trigger warnings or content notes used appropriately
+    // 8 — Trigger warnings or content notes used appropriately
     {
       doText:   '"Content note: this post includes discussion of medical procedures and hospitalisation."',
       dontText: 'Graphic or distressing content about disability, illness, or trauma posted with no advance warning.',
     },
-    // 10 — Team has received disability inclusion training
+    // 9 — Team has received disability inclusion training
     {
       doText:   'Team has attended a disability inclusion workshop. Training is documented, refreshed annually, and covers Filipino context.',
       dontText: 'No formal training. Team relies on assumptions and good intentions — without structured knowledge.',
+    },
+    // 10 — Filipino Sign Language (FSL) used for key messages
+    {
+      doText:   'Major announcements include an FSL interpreter in-frame, with clear sightlines and adequate screen size.',
+      dontText: 'FSL interpreter placed in a tiny corner box, partially obscured, or removed during post-production editing.',
     },
   ],
 };
@@ -1195,8 +1195,8 @@ const data = {
       { label: 'Website is fully navigable by keyboard alone', hint: 'Tab through the entire page — every link, button, and form field should be reachable without a mouse. (WCAG 2.1.1)', tag: 'must' },
       { label: 'Compatible with screen readers', hint: 'Test with NVDA (Windows) or VoiceOver (Mac/iOS). Headings, links, and forms should be announced correctly. (WCAG 4.1.2)', tag: 'must' },
       { label: 'Font sizes are readable without zooming', hint: 'Body text is at least 16px. Content does not break when browser text size is increased to 200%. (WCAG 1.4.4)', tag: 'must' },
-      { label: 'Forms have clear, visible labels and error messages', hint: 'Labels are always visible (not just placeholders). Error messages say what went wrong and how to fix it. (WCAG 1.3.1 + 3.3.1)', tag: 'should' },
       { label: 'No content flashes more than 3 times per second', hint: 'Flashing or strobing content can trigger seizures. Avoid or provide a warning and pause option. (WCAG 2.3.1)', tag: 'must' },
+      { label: 'Forms have clear, visible labels and error messages', hint: 'Labels are always visible (not just placeholders). Error messages say what went wrong and how to fix it. (WCAG 1.3.1 + 3.3.1)', tag: 'should' },
       { label: 'Language is set correctly in the HTML', hint: 'The lang attribute on the html element is set (e.g. lang="en" or lang="fil") so screen readers use the right voice. (WCAG 3.1.1)', tag: 'should' },
       { label: 'Accessibility statement or contact info is published', hint: 'Users with disabilities can find a way to report barriers or request alternative formats. (UNCRPD Art. 9)', tag: 'good' },
     ]
@@ -1205,27 +1205,27 @@ const data = {
     items: [
       { label: 'Image posts include alt text or caption descriptions', hint: 'Manually add alt text to every image on Facebook, Instagram, LinkedIn, and X. Describe what is shown — not just "image" or the brand name.', tag: 'must' },
       { label: 'Videos are captioned before publishing', hint: 'Do not rely on auto-captions alone. Upload an SRT file or burn captions in — and review for accuracy in Filipino and English.', tag: 'must' },
-      { label: 'Captions are on by default in video posts', hint: 'Many users watch without sound. Captions should appear without the viewer needing to enable them.', tag: 'should' },
       { label: 'Text in graphics is readable at small screen sizes', hint: 'Avoid font sizes below 14pt in designed assets. Ensure high contrast between text and background colors.', tag: 'must' },
+      { label: 'Audio content has a written transcript or summary', hint: 'For voice notes, podcast clips, and Spaces — provide a text version for deaf and hard-of-hearing followers.', tag: 'must' },
+      { label: 'Person-first language is used consistently', hint: 'Say "person with a disability" — not "handicapped," "differently-abled," "special," or "physically challenged."', tag: 'must' },
+      { label: 'Captions are on by default in video posts', hint: 'Many users watch without sound. Captions should appear without the viewer needing to enable them.', tag: 'should' },
       { label: 'Hashtags use CamelCase for screen reader clarity', hint: '#DigitalForAll not #digitalforall — screen readers pronounce each word correctly with CamelCase formatting.', tag: 'should' },
       { label: 'Emojis are used sparingly and placed after text', hint: 'Screen readers announce every emoji. Avoid mid-sentence placement or long emoji strings which disrupt reading flow.', tag: 'should' },
-      { label: 'Audio content has a written transcript or summary', hint: 'For voice notes, podcast clips, and Spaces — provide a text version for deaf and hard-of-hearing followers.', tag: 'must' },
       { label: 'Persons with disabilities are represented authentically', hint: 'Avoid inspiration porn or tokenism. Feature Persons with Disability as real consumers, creators, and professionals with full lives.', tag: 'good' },
-      { label: 'Person-first language is used consistently', hint: 'Say "person with a disability" — not "handicapped," "differently-abled," "special," or "physically challenged."', tag: 'must' },
     ]
   },
   campaign: {
     items: [
       { label: 'Accessibility requirements were in the brief from the start', hint: 'Accessibility must be in the brief, scope, and timeline — not retrofitted after production is complete.', tag: 'must' },
-      { label: 'Creative assets were tested by persons with disabilities', hint: 'Include Persons with Disability in user testing and focus groups during development, not only at the final review stage.', tag: 'should' },
+      { label: 'Campaign content reflows correctly on mobile without horizontal scrolling', hint: 'All campaign pages and digital assets must remain readable when zoomed to 400% or on small screens — without requiring horizontal scrolling. This serves users with low vision who rely on zoom. (WCAG 1.4.10 · UNCRPD Art. 9)', tag: 'must' },
       { label: 'All videos include captions and audio descriptions', hint: 'Captions serve deaf audiences; audio descriptions narrate visual-only information for blind audiences.', tag: 'must' },
       { label: 'Print and digital materials meet color contrast standards', hint: 'Campaign visuals, OOH, and digital ads all meet WCAG AA contrast ratios for text and key graphics.', tag: 'must' },
       { label: 'Campaign landing pages are accessible', hint: 'The page linked in ads must meet the same accessibility criteria — not just the creative itself.', tag: 'must' },
+      { label: 'Creative assets were tested by persons with disabilities', hint: 'Include Persons with Disability in user testing and focus groups during development, not only at the final review stage.', tag: 'should' },
       { label: 'Messaging avoids pity or hero narratives about disability', hint: 'Check messaging against the social model of disability: disability is not the problem, exclusion is.', tag: 'good' },
       { label: 'Campaign team included or consulted persons with disabilities', hint: 'Authentic inclusion starts in the room. Was a Person with Disability part of the creative team or consulted as an expert?', tag: 'good' },
       { label: 'Alternative formats were offered where relevant', hint: 'For major campaigns, consider whether Easy Read, large print, FSL interpretation, or audio versions are needed.', tag: 'good' },
       { label: 'Campaign results were reviewed for inclusive reach', hint: 'Did your post-campaign analysis consider whether disability communities were reached and engaged?', tag: 'good' },
-      { label: 'Campaign content reflows correctly on mobile without horizontal scrolling', hint: 'All campaign pages and digital assets must remain readable when zoomed to 400% or on small screens — without requiring horizontal scrolling. This serves users with low vision who rely on zoom. (WCAG 1.4.10 · UNCRPD Art. 9)', tag: 'must' },
     ]
   },
   comms: {
@@ -1234,13 +1234,13 @@ const data = {
       { label: 'Ableist language and slang have been removed from copy', hint: 'Audit recurring phrases. Terms like "blind spot," "tone-deaf," "crippling," "lame," and "crazy" carry ableist connotations even when used casually.', tag: 'must' },
       { label: 'Content avoids inspiration porn', hint: 'Portraying Persons with Disability primarily as sources of inspiration for non-disabled audiences reduces people to their disability. Feature Persons with Disability as multidimensional people.', tag: 'must' },
       { label: 'Disability is not used as a metaphor or punchline', hint: 'Avoid metaphors that frame disability as tragedy or weakness (e.g. "paralyzed by indecision," "blind faith"). These reinforce harmful stigma.', tag: 'must' },
-      { label: 'Plain language principles are applied throughout', hint: 'Use short sentences, common words, and active voice. Aim for Grade 8 reading level or below. Jargon-heavy copy excludes people with cognitive and intellectual disabilities.', tag: 'should' },
       { label: 'Content is reviewed for cultural sensitivity in the Philippine context', hint: 'Disability stigma intersects with Filipino cultural values. Avoid messaging that frames disability as hiya (shame), karma, or divine punishment.', tag: 'must' },
-      { label: 'Filipino Sign Language (FSL) is used for key messages', hint: 'FSL interpretation makes content accessible to the Deaf community. Prioritize this for high-impact announcements and major campaigns.', tag: 'good' },
+      { label: 'Plain language principles are applied throughout', hint: 'Use short sentences, common words, and active voice. Aim for Grade 8 reading level or below. Jargon-heavy copy excludes people with cognitive and intellectual disabilities.', tag: 'should' },
       { label: 'Persons with disabilities are co-creators, not just subjects', hint: 'Content developed with Persons with Disability — in research, scripting, talent, or review — is more authentic. "Nothing about us without us."', tag: 'should' },
       { label: 'Representation spans the full diversity of disability', hint: 'Disability includes physical, sensory, cognitive, intellectual, psychosocial, and hidden conditions. Avoid defaulting only to wheelchair users as the representative image.', tag: 'should' },
       { label: 'Trigger warnings or content notes are used where appropriate', hint: 'For content referencing trauma, medical procedures, or distressing themes — provide a brief content note so audiences can make informed choices.', tag: 'good' },
       { label: 'Your team has received disability inclusion training', hint: 'Inclusive communication skills must be built, not assumed. Has your team attended a workshop or briefing on disability-inclusive practice?', tag: 'good' },
+      { label: 'Filipino Sign Language (FSL) is used for key messages', hint: 'FSL interpretation makes content accessible to the Deaf community. Prioritize this for high-impact announcements and major campaigns.', tag: 'good' },
     ]
   }
 };
