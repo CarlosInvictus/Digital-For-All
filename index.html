@@ -182,6 +182,36 @@
   }
   .hero-meta strong { color: var(--text-secondary); font-weight: 500; }
 
+  /* HOW TO USE STEPS */
+  .hero-steps {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .hero-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .hero-step-num {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--purple-50);
+    color: var(--purple-600);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-step-text { font-size: 13px; color: var(--text-secondary); line-height: 1.5; padding-top: 2px; }
+
   /* SCORE PANEL */
   .score-panel {
     background: var(--bg);
@@ -224,27 +254,31 @@
   /* MAIN CONTENT */
   .main { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 
-  /* TABS */
-  .tabs-wrap { display: flex; gap: 6px; margin-bottom: 2rem; flex-wrap: wrap; }
+  /* SECTION SELECTOR (replaces old tabs, lives in the top overview card) */
+  .tabs-wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 8px; margin-bottom: 1.25rem; }
   .tab-btn {
     display: flex;
-    align-items: center;
-    gap: 7px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
     font-size: 13px;
     font-weight: 500;
-    padding: 8px 16px;
-    border-radius: 99px;
+    padding: 10px 14px;
+    border-radius: var(--radius-md);
     border: 1px solid var(--border-med);
     background: var(--bg);
     color: var(--text-secondary);
     cursor: pointer;
     transition: all 0.15s;
+    text-align: left;
+    width: 100%;
   }
+  .tab-btn-top { display: flex; align-items: center; gap: 7px; width: 100%; }
   .tab-btn:hover { background: var(--bg-secondary); color: var(--text-primary); }
-  .tab-btn.active-purple { background: var(--purple-50); border-color: var(--purple-200); color: var(--purple-800); }
-  .tab-btn.active-teal   { background: var(--teal-50);   border-color: var(--teal-100);   color: var(--teal-800); }
-  .tab-btn.active-coral  { background: var(--coral-50);  border-color: var(--coral-100);  color: var(--coral-800); }
-  .tab-btn.active-pink   { background: var(--pink-50);   border-color: var(--pink-100);   color: var(--pink-800); }
+  .tab-btn.active-purple { background: var(--purple-50); border-color: var(--purple-200); color: var(--white); }
+  .tab-btn.active-teal   { background: var(--teal-50);   border-color: var(--teal-100);   color: var(--white); }
+  .tab-btn.active-coral  { background: var(--coral-50);  border-color: var(--coral-100);  color: var(--white); }
+  .tab-btn.active-pink   { background: var(--pink-50);   border-color: var(--pink-100);   color: var(--white); }
   .tab-badge {
     font-size: 10px;
     font-weight: 600;
@@ -254,11 +288,54 @@
     color: var(--text-tertiary);
     min-width: 22px;
     text-align: center;
+    margin-left: auto;
   }
   .tab-btn.active-purple .tab-badge { background: var(--purple-100); color: var(--purple-800); }
   .tab-btn.active-teal   .tab-badge { background: var(--teal-100);   color: var(--teal-800); }
   .tab-btn.active-coral  .tab-badge { background: var(--coral-100);  color: var(--coral-800); }
   .tab-btn.active-pink   .tab-badge { background: var(--pink-100);   color: var(--pink-800); }
+  .tab-btn-level {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 9px;
+    border-radius: 99px;
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+  }
+
+  /* OVERVIEW CARD (top of page) */
+  .overview-card {
+    background: var(--bg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 1.5rem;
+  }
+  .overview-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem; }
+  .overview-subtitle { font-size: 12px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.06em; margin: 1.25rem 0 0.75rem; }
+
+  /* TIER LEGEND */
+  .tier-legend {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 8px;
+  }
+  .tier-legend-item {
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    padding: 8px 10px;
+  }
+  .tier-legend-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 9px;
+    border-radius: 99px;
+    letter-spacing: 0.03em;
+    margin-bottom: 5px;
+  }
+  .tier-legend-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.5; }
 
   /* SECTION */
   .section-panel { display: none; }
@@ -326,7 +403,7 @@
   .check-text { flex: 1; min-width: 0; }
   .check-label { font-size: 14px; font-weight: 500; color: var(--text-primary); line-height: 1.5; }
   .check-hint { font-size: 12px; color: var(--text-secondary); margin-top: 4px; line-height: 1.6; }
-  .check-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
+  .check-right { display: flex; align-items: center; gap: 6px; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
   .check-tag {
     font-size: 10px;
     font-weight: 600;
@@ -340,19 +417,22 @@
   .tag-good   { background: var(--teal-50);    color: var(--teal-800); }
   .na-btn {
     font-size: 10px;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text-tertiary);
-    background: none;
+    background: var(--bg-secondary);
     border: 1px solid var(--border);
     border-radius: 99px;
     padding: 2px 8px;
     cursor: pointer;
     white-space: nowrap;
     transition: all 0.15s;
+    letter-spacing: 0.02em;
   }
-  .na-btn:hover { background: var(--bg-secondary); color: var(--text-secondary); }
+  .na-btn.active { background: var(--amber-100); border-color: var(--amber-400); color: var(--amber-800); }
+  .na-btn:hover { background: var(--bg-tertiary); color: var(--text-secondary); }
+  .na-btn.active:hover { background: var(--amber-100); }
 
-  /* SUMMARY */
+  /* SUMMARY / ACTIONS CARD */
   .summary-card {
     background: var(--bg);
     border-radius: var(--radius-lg);
@@ -361,40 +441,6 @@
     box-shadow: var(--shadow-sm);
     margin-bottom: 1rem;
   }
-  .summary-title { font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem; }
-  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
-  .sum-item {
-    background: var(--bg-secondary);
-    border-radius: var(--radius-md);
-    padding: 12px 14px;
-    border: 1px solid var(--border);
-  }
-  .sum-label { font-size: 11px; color: var(--text-tertiary); margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
-  .sum-label svg { width: 13px; height: 13px; stroke: currentColor; }
-  .sum-val { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px; }
-  .sum-sub { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
-  .sum-desc { font-size: 11px; line-height: 1.55; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
-
-  /* Per-level tile colours */
-  .sum-item-notstarted { background: var(--bg-secondary);  border-color: var(--border); }
-  .sum-item-notstarted .sum-val  { color: var(--text-tertiary); }
-  .sum-item-notstarted .sum-desc { color: var(--text-tertiary); }
-
-  .sum-item-awareness  { background: var(--amber-50);  border-color: var(--amber-100); }
-  .sum-item-awareness  .sum-val  { color: var(--white); }
-  .sum-item-awareness  .sum-desc { color: var(--white); }
-
-  .sum-item-practicing { background: var(--purple-50); border-color: var(--purple-100); }
-  .sum-item-practicing .sum-val  { color: var(--white); }
-  .sum-item-practicing .sum-desc { color: var(--white); }
-
-  .sum-item-advancing  { background: var(--teal-50);   border-color: var(--teal-100); }
-  .sum-item-advancing  .sum-val  { color: var(--white); }
-  .sum-item-advancing  .sum-desc { color: var(--white); }
-
-  .sum-item-leading    { background: var(--green-50);  border-color: #C0DD97; }
-  .sum-item-leading    .sum-val  { color: var(--white); }
-  .sum-item-leading    .sum-desc { color: var(--white); }
 
   .cta-card {
     border-radius: var(--radius-lg);
@@ -447,9 +493,8 @@
     flex-wrap: wrap;
     font-size: 12px;
     color: var(--text-secondary);
-    margin-bottom: 1.5rem;
-    padding: 12px 16px;
-    background: var(--bg);
+    padding: 10px 14px;
+    background: var(--bg-secondary);
     border-radius: var(--radius-md);
     border: 1px solid var(--border);
     align-items: center;
@@ -683,7 +728,7 @@
       </div>
       <div>
         <div class="nav-name">Digital For All</div>
-        <div class="nav-tag">Invictus PH · 2026</div>
+        <div class="nav-tag">RunItByDIA</div>
       </div>
     </a>
     <div class="nav-score-pill" id="navScore" aria-live="polite">Not started</div>
@@ -699,68 +744,119 @@
       <span><strong>40 items</strong> across 4 sections</span>
       <span><strong>WCAG 2.1 AA</strong> aligned</span>
       <span><strong>Free</strong> · No login required</span>
-      <span>Initiated by <strong>Invcitus PH</strong></span>
+      <span>Initiated by <strong>Invictus PH</strong></span>
     </div>
+    <ol class="hero-steps" aria-label="How to use this tool">
+      <li class="hero-step">
+        <span class="hero-step-num" aria-hidden="true">1</span>
+        <span class="hero-step-text">Pick a section below — Website, Social media, Campaign, or Inclusive comms.</span>
+      </li>
+      <li class="hero-step">
+        <span class="hero-step-num" aria-hidden="true">2</span>
+        <span class="hero-step-text">Check off each item that's already true for you. Mark N/A if it doesn't apply.</span>
+      </li>
+      <li class="hero-step">
+        <span class="hero-step-num" aria-hidden="true">3</span>
+        <span class="hero-step-text">Tap Example to see a quick do/don't for that item.</span>
+      </li>
+      <li class="hero-step">
+        <span class="hero-step-num" aria-hidden="true">4</span>
+        <span class="hero-step-text">See your maturity level update for each section and overall.</span>
+      </li>
+    </ol>
   </div>
 </header>
 
-<div class="score-panel" role="region" aria-label="Audit progress">
-  <div class="score-inner">
-    <div class="score-row">
-      <span class="score-label">Overall level</span>
-      <span class="maturity-overall" id="overallMaturityLabel" aria-live="polite">Not started</span>
-    </div>
-    <div class="bar-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Audit completion">
-      <div class="bar-fill" id="barFill"></div>
-    </div>
-    <div class="verdict-row">
-      <span class="verdict-badge" id="verdictBadge">Start your audit below</span>
-      <div class="section-pills" aria-hidden="true">
-        <span class="section-pill" id="pill-website">Website · –</span>
-        <span class="section-pill" id="pill-social">Social · –</span>
-        <span class="section-pill" id="pill-campaign">Campaign · –</span>
-        <span class="section-pill" id="pill-comms">Comms · –</span>
-      </div>
-    </div>
-  </div>
-</div>
-
 <main class="main" id="main-content">
 
-  <div class="tabs-wrap" role="tablist" aria-label="Audit sections">
-    <button class="tab-btn active-purple" role="tab" aria-selected="true" aria-controls="section-website" id="tab-website" onclick="switchTab('website')">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-      Website
-      <span class="tab-badge" id="badge-website">0/10</span>
-    </button>
-    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="section-social" id="tab-social" onclick="switchTab('social')">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-      Social media
-      <span class="tab-badge" id="badge-social">0/9</span>
-    </button>
-    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="section-campaign" id="tab-campaign" onclick="switchTab('campaign')">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-      Campaign
-      <span class="tab-badge" id="badge-campaign">0/9</span>
-    </button>
-    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="section-comms" id="tab-comms" onclick="switchTab('comms')">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      Inclusive comms
-      <span class="tab-badge" id="badge-comms">0/11</span>
-    </button>
+  <div class="overview-card" role="region" aria-label="Audit overview">
+    <div class="overview-title">Level by section</div>
+    <div class="tabs-wrap" role="tablist" aria-label="Audit sections">
+      <button class="tab-btn active-purple" role="tab" aria-selected="true" aria-controls="section-website" id="tab-website" onclick="switchTab('website')">
+        <span class="tab-btn-top">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Website
+          <span class="tab-badge" id="badge-website">0/10</span>
+        </span>
+        <span class="tab-btn-level ml-notstarted" id="maturity-website-tab">Not started</span>
+      </button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="section-social" id="tab-social" onclick="switchTab('social')">
+        <span class="tab-btn-top">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          Social media
+          <span class="tab-badge" id="badge-social">0/9</span>
+        </span>
+        <span class="tab-btn-level ml-notstarted" id="maturity-social-tab">Not started</span>
+      </button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="section-campaign" id="tab-campaign" onclick="switchTab('campaign')">
+        <span class="tab-btn-top">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+          Campaign
+          <span class="tab-badge" id="badge-campaign">0/9</span>
+        </span>
+        <span class="tab-btn-level ml-notstarted" id="maturity-campaign-tab">Not started</span>
+      </button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="section-comms" id="tab-comms" onclick="switchTab('comms')">
+        <span class="tab-btn-top">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Inclusive comms
+          <span class="tab-badge" id="badge-comms">0/11</span>
+        </span>
+        <span class="tab-btn-level ml-notstarted" id="maturity-comms-tab">Not started</span>
+      </button>
+    </div>
+
+    <div class="legend" role="note" aria-label="Priority level legend">
+      <span class="legend-label">Priority:</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#D85A30"></span> Must do — legal &amp; ethical obligation</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#7F77DD"></span> Should do — strong practice</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#1D9E75"></span> Good practice — leadership level</span>
+    </div>
+
+    <div class="overview-subtitle">Maturity tiers</div>
+    <div class="tier-legend" role="note" aria-label="Maturity tier legend">
+      <div class="tier-legend-item">
+        <span class="tier-legend-label ml-awareness">Awareness</span>
+        <div class="tier-legend-desc">Some practices are in place, but Must Do items are still unchecked.</div>
+      </div>
+      <div class="tier-legend-item">
+        <span class="tier-legend-label ml-practicing">Practicing</span>
+        <div class="tier-legend-desc">All Must Do items are checked — your baseline obligations are met.</div>
+      </div>
+      <div class="tier-legend-item">
+        <span class="tier-legend-label ml-advancing">Advancing</span>
+        <div class="tier-legend-desc">All Must Do and Should Do items are checked — strong, consistent practice.</div>
+      </div>
+      <div class="tier-legend-item">
+        <span class="tier-legend-label ml-leading">Leading</span>
+        <div class="tier-legend-desc">Everything above, plus most Good Practice items — you're setting the standard.</div>
+      </div>
+    </div>
+    
+
+      <div class="cta-card" id="ctaBox"></div>
+      <div class="actions-row">
+        <button class="btn-ghost" onclick="resetAll()">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg>
+          Reset all
+        </button>
+        <button class="btn-ghost" onclick="window.print()">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print / save as PDF
+        </button>
+        <button class="btn-ghost" onclick="copyLink()">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span id="copyBtnText">Copy link</span>
+        </button>
+        </div>
+
   </div>
 
-  <div class="legend" role="note" aria-label="Priority level legend">
-    <span class="legend-label">Priority:</span>
-    <span class="legend-item"><span class="legend-dot" style="background:#D85A30"></span> Must do — legal &amp; ethical obligation</span>
-    <span class="legend-item"><span class="legend-dot" style="background:#7F77DD"></span> Should do — strong practice</span>
-    <span class="legend-item"><span class="legend-dot" style="background:#1D9E75"></span> Good practice — leadership level</span>
-  </div>
 
   <section id="section-website" class="section-panel visible" role="tabpanel" aria-labelledby="tab-website">
     <div class="section-header">
       <div class="section-icon" style="background:var(--purple-50)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#534AB7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       </div>
       <div>
         <div class="section-title">Website</div>
@@ -775,7 +871,7 @@
   <section id="section-social" class="section-panel" role="tabpanel" aria-labelledby="tab-social">
     <div class="section-header">
       <div class="section-icon" style="background:var(--teal-50)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
       </div>
       <div>
         <div class="section-title">Social media</div>
@@ -816,59 +912,6 @@
     </div>
     <div class="checklist" id="list-comms"></div>
   </section>
-
-  <div class="summary-card" role="region" aria-label="Score summary">
-    <div class="summary-title">Level by section</div>
-    <div class="summary-grid">
-      <div class="sum-item">
-        <div class="sum-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          Website
-        </div>
-        <div class="sum-val" id="wScore">—</div>
-        <div class="sum-sub" id="wScoreSub">not started</div>
-      </div>
-      <div class="sum-item">
-        <div class="sum-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          Social
-        </div>
-        <div class="sum-val" id="sScore">—</div>
-        <div class="sum-sub" id="sScoreSub">not started</div>
-      </div>
-      <div class="sum-item">
-        <div class="sum-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
-          Campaign
-        </div>
-        <div class="sum-val" id="cScore">—</div>
-        <div class="sum-sub" id="cScoreSub">not started</div>
-      </div>
-      <div class="sum-item">
-        <div class="sum-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          Incl. comms
-        </div>
-        <div class="sum-val" id="iScore">—</div>
-        <div class="sum-sub" id="iScoreSub">not started</div>
-      </div>
-    </div>
-    <div class="cta-card" id="ctaBox"></div>
-    <div class="actions-row">
-      <button class="btn-ghost" onclick="resetAll()">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.5"/></svg>
-        Reset all
-      </button>
-      <button class="btn-ghost" onclick="window.print()">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-        Print / save as PDF
-      </button>
-      <button class="btn-ghost" onclick="copyLink()">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-        <span id="copyBtnText">Copy link</span>
-      </button>
-    </div>
-  </div>
 
 </main>
 
@@ -1305,10 +1348,10 @@ const data = {
 };
 
 const secMeta = {
-  website:  { countId: 'wcount', scoreId: 'wScore', subId: 'wScoreSub', badgeId: 'badge-website',  pillId: 'pill-website',  label: 'Website',  total: 10 },
-  social:   { countId: 'scount', scoreId: 'sScore', subId: 'sScoreSub', badgeId: 'badge-social',   pillId: 'pill-social',   label: 'Social',   total: 9  },
-  campaign: { countId: 'ccount', scoreId: 'cScore', subId: 'cScoreSub', badgeId: 'badge-campaign', pillId: 'pill-campaign', label: 'Campaign', total: 10 },
-  comms:    { countId: 'icount', scoreId: 'iScore', subId: 'iScoreSub', badgeId: 'badge-comms',    pillId: 'pill-comms',    label: 'Comms',    total: 11 }
+  website:  { countId: 'wcount', badgeId: 'badge-website',  pillId: 'pill-website',  label: 'Website',  total: 10 },
+  social:   { countId: 'scount', badgeId: 'badge-social',   pillId: 'pill-social',   label: 'Social',   total: 9  },
+  campaign: { countId: 'ccount', badgeId: 'badge-campaign', pillId: 'pill-campaign', label: 'Campaign', total: 10 },
+  comms:    { countId: 'icount', badgeId: 'badge-comms',    pillId: 'pill-comms',    label: 'Comms',    total: 11 }
 };
 
 const tabColors = { website: 'purple', social: 'teal', campaign: 'coral', comms: 'pink' };
@@ -1333,13 +1376,13 @@ function renderList(secKey) {
     // Only show "See example" button if an example entry exists for this item
     const hasExample = examples[secKey] && examples[secKey][i];
     const exampleBtnHtml = hasExample ? `
-      <button class="example-btn" data-sec="${secKey}" data-idx="${i}" aria-label="See example for: ${item.label}" aria-haspopup="dialog">
+      <button class="example-btn" data-sec="${secKey}" data-idx="${i}" aria-label="See example for: ${item.label}" aria-haspopup="dialog" title="See example">
         <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/>
           <line x1="7" y1="6" x2="7" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           <circle cx="7" cy="4" r="0.75" fill="currentColor"/>
         </svg>
-        See example
+        Example
       </button>` : '';
 
     btn.innerHTML = `
@@ -1370,9 +1413,10 @@ function renderList(secKey) {
     }
 
     const naBtn = document.createElement('button');
-    naBtn.className = 'na-btn';
+    naBtn.className = 'na-btn' + (s === 'na' ? ' active' : '');
     naBtn.textContent = 'N/A';
     naBtn.setAttribute('aria-label', 'Mark as not applicable: ' + item.label);
+    naBtn.setAttribute('aria-pressed', s === 'na' ? 'true' : 'false');
     naBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       state[secKey][i] = state[secKey][i] === 'na' ? 'none' : 'na';
@@ -1416,7 +1460,6 @@ const LEVEL_META = {
   notstarted: {
     label: 'Not started',
     cls: 'ml-notstarted',
-    sumItemCls: 'sum-item-notstarted',
     barCls: '',
     desc: '',
     verdictStyle: 'background:var(--bg-secondary);color:var(--text-tertiary)',
@@ -1427,7 +1470,6 @@ const LEVEL_META = {
   awareness: {
     label: 'Awareness',
     cls: 'ml-awareness',
-    sumItemCls: 'sum-item-awareness',
     barCls: 'bar-fill-awareness',
     desc: "You're making a start. Some accessibility practices are in place, but there are still Must Do items unchecked. These aren't optional — they reflect the legal rights of Persons with Disability under the UNCRPD. Prioritise these first.",
     verdictStyle: 'background:var(--amber-50);color:var(--white)',
@@ -1438,7 +1480,6 @@ const LEVEL_META = {
   practicing: {
     label: 'Practicing',
     cls: 'ml-practicing',
-    sumItemCls: 'sum-item-practicing',
     barCls: 'bar-fill-practicing',
     desc: "You're meeting the baseline. All your legal and ethical obligations are covered — that's a meaningful commitment to the rights of Persons with Disability. Now build on it by working toward the Should Do items.",
     verdictStyle: 'background:var(--purple-50);color:var0(--white)',
@@ -1449,7 +1490,6 @@ const LEVEL_META = {
   advancing: {
     label: 'Advancing',
     cls: 'ml-advancing',
-    sumItemCls: 'sum-item-advancing',
     barCls: 'bar-fill-advancing',
     desc: "You're going beyond compliance. Your team is doing what's required and what's recommended. The Good Practice items are what separate organisations that follow the rules from those that genuinely lead on inclusion.",
     verdictStyle: 'background:var(--teal-50);color:var(--white)',
@@ -1460,7 +1500,6 @@ const LEVEL_META = {
   leading: {
     label: 'Leading',
     cls: 'ml-leading',
-    sumItemCls: 'sum-item-leading',
     barCls: 'bar-fill-leading',
     desc: "You're setting the standard. Your team is doing everything required, recommended, and more. You're not just avoiding harm — you're actively creating space for Persons with Disability to participate fully. Share what you're doing. Others need to see it's possible.",
     verdictStyle: 'background:var(--green-50);color:var(--white)',
@@ -1545,6 +1584,9 @@ function updateScore() {
     // Section header badge
     applyMaturityBadge('maturity-' + sec, secLevel);
 
+    // Section selector button level pill
+    applyMaturityBadge('maturity-' + sec + '-tab', secLevel);
+
     // Tab badge (keep showing checked/applicable count — useful at a glance)
     const badgeEl = document.getElementById(m.badgeId);
     if (badgeEl) badgeEl.textContent = applicable > 0 ? checked + '/' + applicable : 'N/A';
@@ -1552,27 +1594,6 @@ function updateScore() {
     // Sticky pills — show section name + level
     const pillEl = document.getElementById(m.pillId);
     if (pillEl) pillEl.textContent = m.label + ' · ' + secMeta2.label;
-
-    // Summary card: show level as the big value, checked/applicable as sub, desc below
-    const scoreEl = document.getElementById(m.scoreId);
-    const subEl   = document.getElementById(m.subId);
-    if (scoreEl) scoreEl.textContent = secMeta2.label;
-    if (subEl)   subEl.textContent   = applicable > 0 ? checked + ' of ' + applicable + ' done' : 'all N/A';
-
-    // Colour the tile and add/update description
-    const tileEl = scoreEl && scoreEl.closest('.sum-item');
-    if (tileEl) {
-      LEVEL_ORDER.forEach(l => tileEl.classList.remove('sum-item-' + l));
-      tileEl.classList.add('sum-item-' + secLevel);
-      let descEl = tileEl.querySelector('.sum-desc');
-      if (!descEl) {
-        descEl = document.createElement('p');
-        descEl.className = 'sum-desc';
-        tileEl.appendChild(descEl);
-      }
-      descEl.textContent = secMeta2.desc || '';
-      descEl.style.display = secMeta2.desc ? '' : 'none';
-    }
   });
 
   // Overall maturity (gated by weakest)
