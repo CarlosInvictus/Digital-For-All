@@ -277,13 +277,20 @@
   .na-btn:hover { background: var(--border); }
   .na-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
-  .example-btn {
-    font-size: 11px; font-weight: 600; color: var(--text-secondary); background: var(--bg-img);
-    border: 1px solid var(--border); border-radius: 99px; padding: 4px 11px; cursor: pointer;
-    white-space: nowrap; transition: all .15s;
+  .example-divider {
+    border: none; border-top: 1px solid var(--border); margin: 10px 0 10px;
   }
-  .example-btn:hover { background: var(--border); color: var(--text-primary); }
+  .example-btn {
+    display: flex; align-items: center; gap: 8px; width: 100%;
+    padding: 9px 14px; border-radius: var(--radius-sm);
+    background: var(--should-bg); border: 1px solid #93c5fd;
+    color: var(--blue); font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all .15s; text-align: left;
+  }
+  .example-btn:hover { background: #bfdbfe; border-color: var(--blue); }
   .example-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  .example-btn .example-btn-arrow { margin-left: auto; opacity: .7; }
+  .example-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
 
   /* ── FOOTER ── */
   .footer { background: var(--navy); color: #fff; padding: 2.5rem 0 1.5rem; margin-top: 2rem; }
@@ -359,7 +366,7 @@
       <div class="nav-tag">RunItByDIA</div>
     </div>
     <div class="nav-beta-badge" role="status" aria-label="Tool status: Beta Testing — Under Accessibility Audit">
-      <span class="nav-beta-pill">BETA v1.4</span>
+      <span class="nav-beta-pill">BETA v1.5</span>
       <span class="nav-beta-text">Under Accessibility Audit</span>
     </div>
   </div>
@@ -669,10 +676,15 @@ function renderList(secKey) {
         <div class="check-tagrow">
           <span class="check-tag ${tagClass}">${tagLabel}</span>
           <button class="na-btn ${s === 'na' ? 'active' : ''}" type="button" data-act="na">${s === 'na' ? 'N/A ✓' : 'N/A'}</button>
-          ${hasExample ? `<button class="example-btn" type="button" data-act="example" aria-haspopup="dialog">Sample</button>` : ''}
         </div>
         <div class="check-label">${item.label}</div>
         <div class="check-hint">${item.hint}</div>
+        ${hasExample ? `<hr class="example-divider" aria-hidden="true">
+        <button class="example-btn" type="button" data-act="example" aria-haspopup="dialog">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          See sample
+          <svg class="example-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>` : ''}
       </div>
     `;
 
