@@ -26,6 +26,19 @@
 <meta property="og:description" content="Audit your website, social media, campaigns, and communication for accessibility and inclusion. Free tool by Invictus PH.">
 <meta property="og:type" content="website">
 <style>
+  /* ── ACCESSIBILITY UTILITIES ── */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  .skip-link {
+    position: absolute; top: -100%; left: 1rem;
+    background: var(--blue); color: #fff; padding: 8px 16px;
+    border-radius: var(--radius-sm); font-size: 14px; font-weight: 700;
+    text-decoration: none; z-index: 9999;
+  }
+  .skip-link:focus { top: 1rem; }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   /* [EDIT: COLORS] — change these to retheme the whole tool */
@@ -58,7 +71,7 @@
     --bg-img:      #eef0f3;
     --text-primary:#0c1424;
     --text-secondary:#4b5360;
-    --text-tertiary:#8a909c;
+    --text-tertiary:#6b7280;
     --border:      #e3e5ea;
     --border-med:  #cdd1d9;
     --radius-sm:   8px;
@@ -69,7 +82,7 @@
     --shadow-md:   0 8px 24px rgba(12,20,36,0.08), 0 2px 6px rgba(12,20,36,0.04);
   }
 
-  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 
   body {
     font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -148,6 +161,7 @@
     display: flex; flex-direction: column; justify-content: space-between; min-height: 96px;
   }
   .level-card:hover { border-color: var(--border-med); }
+  .level-card:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   .level-card.active { border-color: var(--navy); border-width: 1.5px; }
   .level-card-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-bottom: 14px; }
   .level-card-name { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--text-primary); }
@@ -190,6 +204,7 @@
     transition: all .15s; display: flex; align-items: center; gap: 7px;
   }
   .btn-ghost:hover { background: var(--bg-img); color: var(--text-primary); }
+  .btn-ghost:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   .btn-ghost svg { width: 14px; height: 14px; stroke: currentColor; }
 
   .cta-card {
@@ -232,8 +247,9 @@
   .check-box {
     width: 24px; height: 24px; border-radius: 7px; border: 1.5px solid var(--border-med);
     flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center;
-    transition: all .15s; background: #fff;
+    transition: all .15s; background: #fff; cursor: pointer; padding: 0;
   }
+  .check-box:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
   .check-box svg { width: 14px; height: 14px; display: none; }
   .check-card.checked .check-box { background: #16a34a; border-color: #16a34a; }
   .check-card.checked .check-box svg { display: block; stroke: #fff; }
@@ -259,22 +275,15 @@
   }
   .na-btn.active { background: #fdebd3; border-color: #f3c98c; color: #b1530b; }
   .na-btn:hover { background: var(--border); }
+  .na-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
-  .check-thumb {
-    width: 80px; flex-shrink: 0; border-radius: var(--radius-sm); overflow: hidden;
-    background: var(--bg-img); display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 5px; cursor: pointer; border: 1.5px solid var(--border);
-    transition: all .15s; padding: 0; align-self: stretch;
+  .example-btn {
+    font-size: 11px; font-weight: 600; color: var(--text-secondary); background: var(--bg-img);
+    border: 1px solid var(--border); border-radius: 99px; padding: 4px 11px; cursor: pointer;
+    white-space: nowrap; transition: all .15s;
   }
-  .check-thumb:hover { background: #e2e8f5; border-color: var(--blue); }
-  .check-thumb:hover .check-thumb-label { color: var(--blue); }
-  .check-thumb:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
-  .check-thumb-icon { width: 20px; height: 20px; color: var(--text-tertiary); opacity: .6; }
-  .check-thumb-label {
-    font-size: 9px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--text-tertiary); line-height: 1;
-  }
-  @media (max-width: 480px) { .check-thumb { display: none; } }
+  .example-btn:hover { background: var(--border); color: var(--text-primary); }
+  .example-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
   /* ── FOOTER ── */
   .footer { background: var(--navy); color: #fff; padding: 2.5rem 0 1.5rem; margin-top: 2rem; }
@@ -288,8 +297,8 @@
   .footer-links { display: flex; flex-direction: column; gap: 8px; }
   .footer-links a { font-size: 13px; color: #cbd1dd; text-decoration: none; }
   .footer-links a:hover { color: #fff; text-decoration: underline; }
-  .footer-bottom { font-size: 11.5px; color: #7e8696; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 1.4rem; }
-  .footer-wcag { margin-top: 8px; font-size: 11.5px; color: #7e8696; }
+  .footer-bottom { font-size: 11.5px; color: #8a909c; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 1.4rem; }
+  .footer-wcag { margin-top: 8px; font-size: 11.5px; color: #8a909c; }
 
   @media print {
     .nav, .overview-actions, .footer { display: none; }
@@ -306,9 +315,11 @@
   .popover-card {
     background: #fff; border-radius: var(--radius-xl); box-shadow: 0 20px 60px rgba(12,20,36,0.25);
     width: 100%; max-width: 540px; max-height: 90vh; overflow-y: auto; position: relative;
-    animation: popoverIn .18s ease;
   }
-  @keyframes popoverIn { from { opacity:0; transform: scale(.96) translateY(8px); } to { opacity:1; transform: scale(1) translateY(0); } }
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes popoverIn { from { opacity:0; transform: scale(.96) translateY(8px); } to { opacity:1; transform: scale(1) translateY(0); } }
+    .popover-card { animation: popoverIn .18s ease; }
+  }
   .popover-header { display: flex; align-items: flex-start; gap: 10px; padding: 1.3rem 1.3rem 1rem; border-bottom: 1px solid var(--border); }
   .popover-title { font-size: 14px; font-weight: 700; color: var(--text-primary); line-height: 1.5; flex: 1; }
   .popover-close {
@@ -317,6 +328,7 @@
     flex-shrink: 0; transition: all .15s;
   }
   .popover-close:hover { background: var(--border); color: var(--text-primary); }
+  .popover-close:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   .popover-close svg { width: 12px; height: 12px; stroke: currentColor; }
   .popover-body { padding: 1.3rem; }
   .example-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -337,6 +349,7 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 
 <!-- [EDIT: NAV / HERO TEXT] — brand name, tagline, headline, and intro copy below -->
 <nav class="nav" role="navigation" aria-label="Site navigation">
@@ -362,7 +375,7 @@
       <span><strong>Free</strong> · No login required</span>
       <span>Initiated by <strong>Invictus PH</strong></span>
     </div>
-    <ol class="hero-steps" aria-label="How to use this tool">
+    <ol class="hero-steps" role="list" aria-label="How to use this tool">
       <li class="hero-step"><span class="hero-step-num" aria-hidden="true">1</span><span class="hero-step-text">Pick a section below — Website, Social media, Campaign, or Inclusive comms.</span></li>
       <li class="hero-step"><span class="hero-step-num" aria-hidden="true">2</span><span class="hero-step-text">Check off each item that's already true for you. Mark N/A if it doesn't apply.</span></li>
       <li class="hero-step"><span class="hero-step-num" aria-hidden="true">3</span><span class="hero-step-text">Tap Example to see a quick do/don't for that item.</span></li>
@@ -373,7 +386,7 @@
 
 <section class="overview">
   <div class="wrap">
-    <div class="overview-title">Level by Section</div>
+    <h2 class="overview-title">Level by Section</h2>
     <div class="level-grid" role="tablist" aria-label="Audit sections">
       <button class="level-card active" role="tab" aria-selected="true" aria-controls="section-website" id="tab-website" onclick="switchTab('website')">
         <div class="level-card-top">
@@ -419,12 +432,12 @@
 
     <div class="priority-legend" role="note" aria-label="Priority level legend">
       <strong>Priority:</strong>
-      <span class="priority-legend-item"><span class="priority-dot" style="background:#6d28d9"></span> Must do — legal &amp; ethical obligation</span>
-      <span class="priority-legend-item"><span class="priority-dot" style="background:#2563eb"></span> Should do — strong practice</span>
-      <span class="priority-legend-item"><span class="priority-dot" style="background:#16a34a"></span> Good practice — leadership level</span>
+      <span class="priority-legend-item"><span class="priority-dot" aria-hidden="true" style="background:#6d28d9"></span> Must do — legal &amp; ethical obligation</span>
+      <span class="priority-legend-item"><span class="priority-dot" aria-hidden="true" style="background:#2563eb"></span> Should do — strong practice</span>
+      <span class="priority-legend-item"><span class="priority-dot" aria-hidden="true" style="background:#16a34a"></span> Good practice — leadership level</span>
     </div>
 
-    <div class="tiers-title">Maturity Tiers</div>
+    <h2 class="tiers-title">Maturity Tiers</h2>
     <div class="tier-grid">
       <div class="tier-card">
         <span class="tier-card-label" style="background:var(--tier-awareness-bg);color:var(--tier-awareness-text)">Awareness</span>
@@ -470,8 +483,8 @@
       <div class="section-band-inner">
         <div class="section-band-top">
           <span class="section-band-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
-          <span class="section-band-title">WEBSITE</span>
-          <span class="section-band-pill" id="maturity-website" aria-live="polite">0/10 · Not started</span>
+          <h2 class="section-band-title">Website</h2>
+          <span class="section-band-pill" id="maturity-website" aria-live="polite" aria-atomic="true">0/10 · Not started</span>
         </div>
         <p class="section-band-desc" id="wcount">Technical and structural accessibility of your web presence, aligned with WCAG 2.1 AA</p>
       </div>
@@ -484,8 +497,8 @@
       <div class="section-band-inner">
         <div class="section-band-top">
           <span class="section-band-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></span>
-          <span class="section-band-title">SOCIAL MEDIA</span>
-          <span class="section-band-pill" id="maturity-social" aria-live="polite">0/9 · Not started</span>
+          <h2 class="section-band-title">Social Media</h2>
+          <span class="section-band-pill" id="maturity-social" aria-live="polite" aria-atomic="true">0/9 · Not started</span>
         </div>
         <p class="section-band-desc" id="scount">Accessibility of your organic social content and profiles across platforms</p>
       </div>
@@ -498,8 +511,8 @@
       <div class="section-band-inner">
         <div class="section-band-top">
           <span class="section-band-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg></span>
-          <span class="section-band-title">CAMPAIGN</span>
-          <span class="section-band-pill" id="maturity-campaign" aria-live="polite">0/10 · Not started</span>
+          <h2 class="section-band-title">Campaign</h2>
+          <span class="section-band-pill" id="maturity-campaign" aria-live="polite" aria-atomic="true">0/10 · Not started</span>
         </div>
         <p class="section-band-desc" id="ccount">Accessibility of a specific campaign from brief to delivery</p>
       </div>
@@ -512,8 +525,8 @@
       <div class="section-band-inner">
         <div class="section-band-top">
           <span class="section-band-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
-          <span class="section-band-title">INCLUSIVE COMMS</span>
-          <span class="section-band-pill" id="maturity-comms" aria-live="polite">0/11 · Not started</span>
+          <h2 class="section-band-title">Inclusive Comms</h2>
+          <span class="section-band-pill" id="maturity-comms" aria-live="polite" aria-atomic="true">0/11 · Not started</span>
         </div>
         <p class="section-band-desc" id="icount">Language, representation, process, and team culture across all content</p>
       </div>
@@ -552,9 +565,9 @@
         <div class="footer-tagline" style="margin-top:6px;font-style:normal">#DapatPwede</div>
       </div>
       <div class="footer-links">
-        <a href="https://invictusph.com/news-%26-insights/f/genuine-accessibility-invictus-ph-life-haven-say-dapatpwede" target="_blank" rel="noopener">#DapatPWEDE</a>
-        <a href="https://www.w3.org/WAI/WCAG21/quickref/" target="_blank" rel="noopener">WCAG 2.1 Quick Reference (W3C)</a>
-        <a href="https://www.un.org/development/desa/disabilities/convention-on-the-rights-of-persons-with-disabilities.html" target="_blank" rel="noopener">UN Convention on Rights of Persons with Disabilities</a>
+        <a href="https://invictusph.com/news-%26-insights/f/genuine-accessibility-invictus-ph-life-haven-say-dapatpwede" target="_blank" rel="noopener">#DapatPWEDE<span class="sr-only"> (opens in new tab)</span></a>
+        <a href="https://www.w3.org/WAI/WCAG21/quickref/" target="_blank" rel="noopener">WCAG 2.1 Quick Reference (W3C)<span class="sr-only"> (opens in new tab)</span></a>
+        <a href="https://www.un.org/development/desa/disabilities/convention-on-the-rights-of-persons-with-disabilities.html" target="_blank" rel="noopener">UN Convention on Rights of Persons with Disabilities<span class="sr-only"> (opens in new tab)</span></a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -651,29 +664,17 @@ function renderList(secKey) {
     const hasExample = examples[secKey] && examples[secKey][i];
 
     card.innerHTML = `
-      <span class="check-box" aria-hidden="true">${checkSvg}</span>
+      <button type="button" class="check-box" role="checkbox" aria-checked="${s === 'checked' ? 'true' : 'false'}" aria-label="${s === 'checked' ? 'Checked' : s === 'na' ? 'Not applicable' : 'Unchecked'}: ${item.label.replace(/"/g, '&quot;')}">${checkSvg}</button>
       <div class="check-main">
         <div class="check-tagrow">
           <span class="check-tag ${tagClass}">${tagLabel}</span>
           <button class="na-btn ${s === 'na' ? 'active' : ''}" type="button" data-act="na">${s === 'na' ? 'N/A ✓' : 'N/A'}</button>
+          ${hasExample ? `<button class="example-btn" type="button" data-act="example" aria-label="See example for: ${item.label}" aria-haspopup="dialog">Sample</button>` : ''}
         </div>
         <div class="check-label">${item.label}</div>
         <div class="check-hint">${item.hint}</div>
       </div>
-      ${hasExample ? `<button class="check-thumb" type="button" data-act="example" aria-label="See example for: ${item.label}" aria-haspopup="dialog">
-        <svg class="check-thumb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        <span class="check-thumb-label">Sample</span>
-      </button>` : `<div class="check-thumb" aria-hidden="true">
-        <svg class="check-thumb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        <span class="check-thumb-label">Sample</span>
-      </div>`}
     `;
-
-    // Toggle checked when clicking the card itself (but not its inner buttons)
-    card.setAttribute('role', 'button');
-    card.setAttribute('tabindex', '0');
-    card.setAttribute('aria-pressed', s === 'checked' ? 'true' : 'false');
-    card.setAttribute('aria-label', (s === 'checked' ? 'Checked: ' : s === 'na' ? 'Not applicable: ' : 'Unchecked: ') + item.label);
 
     card.addEventListener('click', (e) => {
       if (e.target.closest('[data-act="example"]')) {
@@ -690,16 +691,6 @@ function renderList(secKey) {
       state[secKey][i] = state[secKey][i] === 'checked' ? 'none' : 'checked';
       renderList(secKey);
       updateScore();
-    });
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        if (document.activeElement === card) {
-          e.preventDefault();
-          state[secKey][i] = state[secKey][i] === 'checked' ? 'none' : 'checked';
-          renderList(secKey);
-          updateScore();
-        }
-      }
     });
 
     list.appendChild(card);
@@ -812,7 +803,8 @@ function switchTab(sec) {
     tabBtn.setAttribute('aria-selected', s === sec ? 'true' : 'false');
     tabBtn.classList.toggle('active', s === sec);
   });
-  document.getElementById('section-' + sec).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('section-' + sec).scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
 }
 
 function resetAll() {
@@ -891,6 +883,13 @@ const examples = {
 ══════════════════════════════════════════════════════ */
 let lastFocusedBtn = null;
 
+function setPageInert(inert) {
+  ['nav', 'header', '.overview', '#main-content', 'footer'].forEach(sel => {
+    const el = document.querySelector(sel);
+    if (el) el.inert = inert;
+  });
+}
+
 function openPopover(secKey, idx, labelText) {
   const ex = (examples[secKey] && examples[secKey][idx]) ? examples[secKey][idx] : null;
   const popover = document.getElementById('examplePopover');
@@ -901,7 +900,9 @@ function openPopover(secKey, idx, labelText) {
   body.innerHTML = ex ? buildPopoverBody(ex) : '<p style="font-size:13px;color:var(--text-secondary)">No example added yet for this item.</p>';
 
   popover.classList.add('open');
+  popover.removeAttribute('hidden');
   document.body.style.overflow = 'hidden';
+  setPageInert(true);
   document.getElementById('popoverClose').focus();
 }
 
@@ -936,6 +937,7 @@ function closePopover() {
   const popover = document.getElementById('examplePopover');
   popover.classList.remove('open');
   document.body.style.overflow = '';
+  setPageInert(false);
   if (lastFocusedBtn) { lastFocusedBtn.focus(); lastFocusedBtn = null; }
 }
 
