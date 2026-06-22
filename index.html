@@ -85,15 +85,21 @@
   .nav { background: var(--navy); color: #fff; }
   .nav-inner {
     max-width: 920px; margin: 0 auto; padding: 1.1rem 1.5rem;
-    display: flex; align-items: center; gap: 12px;
+    display: flex; align-items: center; gap: 12px; justify-content: space-between;
   }
-  .nav-logo {
-    width: 42px; height: 42px; border-radius: 12px; background: var(--blue);
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
-  .nav-logo svg { width: 22px; height: 22px; }
   .nav-name { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; }
   .nav-tag { font-size: 12px; color: #9aa3b5; margin-top: 1px; }
+  .nav-beta-badge {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 3px; flex-shrink: 0;
+  }
+  .nav-beta-pill {
+    font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+    background: #f59e0b; color: #1c1002; padding: 3px 9px; border-radius: 99px;
+  }
+  .nav-beta-text {
+    font-size: 12px; color: #9aa3b5;
+  }
+  @media (max-width: 480px) { .nav-beta-text { display: none; } }
 
   /* ── HERO ── */
   .hero { background: var(--bg-page); padding: 2.75rem 0 1.5rem; }
@@ -246,27 +252,28 @@
   .check-hint { font-size: 12.5px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 10px; }
 
   .check-footer-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .example-btn {
-    display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700;
-    color: var(--blue); background: var(--should-bg); border: none; border-radius: 99px; padding: 4px 11px;
-    cursor: pointer; white-space: nowrap; transition: all .15s;
-  }
-  .example-btn:hover { background: #c7dcfc; }
-  .example-btn svg { width: 11px; height: 11px; flex-shrink: 0; }
-
   .na-btn {
     font-size: 11px; font-weight: 600; color: var(--text-tertiary); background: var(--bg-img);
     border: 1px solid var(--border); border-radius: 99px; padding: 4px 11px; cursor: pointer;
-    white-space: nowrap; transition: all .15s; margin-left: auto;
+    white-space: nowrap; transition: all .15s;
   }
   .na-btn.active { background: #fdebd3; border-color: #f3c98c; color: #b1530b; }
   .na-btn:hover { background: var(--border); }
 
   .check-thumb {
-    width: 96px; flex-shrink: 0; border-radius: var(--radius-sm); overflow: hidden;
+    width: 80px; flex-shrink: 0; border-radius: var(--radius-sm); overflow: hidden;
     background: var(--bg-img); display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 5px; cursor: pointer; border: 1.5px solid var(--border);
+    transition: all .15s; padding: 0; align-self: stretch;
   }
-  .check-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .check-thumb:hover { background: #e2e8f5; border-color: var(--blue); }
+  .check-thumb:hover .check-thumb-label { color: var(--blue); }
+  .check-thumb:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  .check-thumb-icon { width: 20px; height: 20px; color: var(--text-tertiary); opacity: .6; }
+  .check-thumb-label {
+    font-size: 9px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-tertiary); line-height: 1;
+  }
   @media (max-width: 480px) { .check-thumb { display: none; } }
 
   /* ── FOOTER ── */
@@ -334,19 +341,19 @@
 <!-- [EDIT: NAV / HERO TEXT] — brand name, tagline, headline, and intro copy below -->
 <nav class="nav" role="navigation" aria-label="Site navigation">
   <div class="nav-inner">
-    <div class="nav-logo" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="5" stroke="#fff" stroke-width="2"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M17.7 6.3l2.1-2.1M4.2 19.8l2.1-2.1" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
-    </div>
     <div>
       <div class="nav-name">Digital for All</div>
       <div class="nav-tag">RunItByDIA</div>
+    </div>
+    <div class="nav-beta-badge" role="status" aria-label="Tool status: Beta Testing — Under Accessibility Audit">
+      <span class="nav-beta-pill">BETA</span>
+      <span class="nav-beta-text">Under Accessibility Audit</span>
     </div>
   </div>
 </nav>
 
 <header class="hero">
   <div class="wrap">
-    <div class="hero-eyebrow">Inclusion &amp; Accessibility Advocacy Launch</div>
     <h1 class="hero-title">Accessibility &amp; Inclusive<br>Communication <em>Self-Audit</em></h1>
     <p class="hero-desc">A practical checklist for digital marketing professionals in the Philippines to assess their practices against accessibility standards and inclusive communication principles — grounded in WCAG 2.1 AA and the UNCRPD.</p>
     <div class="hero-meta">
@@ -627,16 +634,6 @@ const sectionDesc = {
   comms:    'Language, representation, process, and team culture across all content',
 };
 
-/* Thumbnail images per section (Unsplash, royalty-free) — used as the
-   generic photo placeholder shown on each checklist card, like the
-   mockup's image squares. Swap these any time. */
-const sectionThumbs = {
-  website:  'https://images.unsplash.com/photo-1593642634367-d91a135587b5?auto=format&fit=crop&w=200&q=60',
-  social:   'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=200&q=60',
-  campaign: 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=200&q=60',
-  comms:    'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=200&q=60',
-};
-
 const state = {};
 Object.keys(data).forEach(sec => { state[sec] = data[sec].items.map(() => 'none'); });
 
@@ -658,18 +655,18 @@ function renderList(secKey) {
       <div class="check-main">
         <div class="check-tagrow">
           <span class="check-tag ${tagClass}">${tagLabel}</span>
+          <button class="na-btn ${s === 'na' ? 'active' : ''}" type="button" data-act="na">${s === 'na' ? 'N/A ✓' : 'N/A'}</button>
         </div>
         <div class="check-label">${item.label}</div>
         <div class="check-hint">${item.hint}</div>
-        <div class="check-footer-row">
-          ${hasExample ? `<button class="example-btn" type="button" data-act="example" aria-label="See example for: ${item.label}" aria-haspopup="dialog">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-            Example
-          </button>` : ''}
-          <button class="na-btn ${s === 'na' ? 'active' : ''}" type="button" data-act="na">${s === 'na' ? 'N/A ✓' : 'N/A'}</button>
-        </div>
       </div>
-      <div class="check-thumb" aria-hidden="true"><img src="${sectionThumbs[secKey]}" alt="" loading="lazy"></div>
+      ${hasExample ? `<button class="check-thumb" type="button" data-act="example" aria-label="See example for: ${item.label}" aria-haspopup="dialog">
+        <svg class="check-thumb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span class="check-thumb-label">Sample</span>
+      </button>` : `<div class="check-thumb" aria-hidden="true">
+        <svg class="check-thumb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span class="check-thumb-label">Sample</span>
+      </div>`}
     `;
 
     // Toggle checked when clicking the card itself (but not its inner buttons)
