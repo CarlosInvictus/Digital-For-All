@@ -237,7 +237,7 @@
   .check-card {
     display: flex; align-items: stretch; gap: 14px; background: var(--bg-card);
     border: 1.5px solid var(--border); border-radius: var(--radius-md); padding: 16px;
-    cursor: pointer; text-align: left; width: 100%; transition: all .15s; box-shadow: var(--shadow-sm);
+    text-align: left; width: 100%; transition: all .15s; box-shadow: var(--shadow-sm);
   }
   .check-card:hover { border-color: var(--border-med); }
   .check-card:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
@@ -352,7 +352,7 @@
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
 <!-- [EDIT: NAV / HERO TEXT] — brand name, tagline, headline, and intro copy below -->
-<nav class="nav" role="navigation" aria-label="Site navigation">
+<header class="nav" role="banner">
   <div class="nav-inner">
     <div>
       <div class="nav-name">Digital for All</div>
@@ -363,9 +363,9 @@
       <span class="nav-beta-text">Under Accessibility Audit</span>
     </div>
   </div>
-</nav>
+</header>
 
-<header class="hero">
+<section class="hero" aria-label="Introduction">
   <div class="wrap">
     <h1 class="hero-title">Accessibility &amp; Inclusive<br>Communication <em>Self-Audit</em></h1>
     <p class="hero-desc">A practical checklist for digital marketing professionals in the Philippines to assess their practices against accessibility standards and inclusive communication principles — grounded in WCAG 2.1 AA and the UNCRPD.</p>
@@ -376,19 +376,19 @@
       <span>Initiated by <strong>Invictus PH</strong></span>
     </div>
     <ol class="hero-steps" role="list" aria-label="How to use this tool">
-      <li class="hero-step"><span class="hero-step-num" aria-hidden="true">1</span><span class="hero-step-text">Pick a section below — Website, Social media, Campaign, or Inclusive comms.</span></li>
-      <li class="hero-step"><span class="hero-step-num" aria-hidden="true">2</span><span class="hero-step-text">Check off each item that's already true for you. Mark N/A if it doesn't apply.</span></li>
-      <li class="hero-step"><span class="hero-step-num" aria-hidden="true">3</span><span class="hero-step-text">Tap Example to see a quick do/don't for that item.</span></li>
-      <li class="hero-step"><span class="hero-step-num" aria-hidden="true">4</span><span class="hero-step-text">See your maturity level update for each section and overall.</span></li>
+      <li class="hero-step"><span class="hero-step-num">1</span><span class="hero-step-text">Pick a section below — Website, Social media, Campaign, or Inclusive comms.</span></li>
+      <li class="hero-step"><span class="hero-step-num">2</span><span class="hero-step-text">Check off each item that's already true for you. Mark N/A if it doesn't apply.</span></li>
+      <li class="hero-step"><span class="hero-step-num">3</span><span class="hero-step-text">Tap Example to see a quick do/don't for that item.</span></li>
+      <li class="hero-step"><span class="hero-step-num">4</span><span class="hero-step-text">See your maturity level update for each section and overall.</span></li>
     </ol>
   </div>
-</header>
+</section>
 
 <section class="overview">
   <div class="wrap">
     <h2 class="overview-title">Level by Section</h2>
     <div class="level-grid" role="tablist" aria-label="Audit sections">
-      <button class="level-card active" role="tab" aria-selected="true" aria-controls="section-website" id="tab-website" onclick="switchTab('website')">
+      <button class="level-card active" role="tab" aria-selected="true" aria-controls="section-website" id="tab-website" tabindex="0" onclick="switchTab('website')">
         <div class="level-card-top">
           <span class="level-card-name">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
@@ -398,7 +398,7 @@
         </div>
         <span class="level-card-badge ml-notstarted" id="maturity-website-tab">Not started</span>
       </button>
-      <button class="level-card" role="tab" aria-selected="false" aria-controls="section-social" id="tab-social" onclick="switchTab('social')">
+      <button class="level-card" role="tab" aria-selected="false" aria-controls="section-social" id="tab-social" tabindex="-1" onclick="switchTab('social')">
         <div class="level-card-top">
           <span class="level-card-name">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
@@ -408,7 +408,7 @@
         </div>
         <span class="level-card-badge ml-notstarted" id="maturity-social-tab">Not started</span>
       </button>
-      <button class="level-card" role="tab" aria-selected="false" aria-controls="section-campaign" id="tab-campaign" onclick="switchTab('campaign')">
+      <button class="level-card" role="tab" aria-selected="false" aria-controls="section-campaign" id="tab-campaign" tabindex="-1" onclick="switchTab('campaign')">
         <div class="level-card-top">
           <span class="level-card-name">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
@@ -418,7 +418,7 @@
         </div>
         <span class="level-card-badge ml-notstarted" id="maturity-campaign-tab">Not started</span>
       </button>
-      <button class="level-card" role="tab" aria-selected="false" aria-controls="section-comms" id="tab-comms" onclick="switchTab('comms')">
+      <button class="level-card" role="tab" aria-selected="false" aria-controls="section-comms" id="tab-comms" tabindex="-1" onclick="switchTab('comms')">
         <div class="level-card-top">
           <span class="level-card-name">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -664,12 +664,12 @@ function renderList(secKey) {
     const hasExample = examples[secKey] && examples[secKey][i];
 
     card.innerHTML = `
-      <button type="button" class="check-box" role="checkbox" aria-checked="${s === 'checked' ? 'true' : 'false'}" aria-label="${s === 'checked' ? 'Checked' : s === 'na' ? 'Not applicable' : 'Unchecked'}: ${item.label.replace(/"/g, '&quot;')}">${checkSvg}</button>
+      <button type="button" class="check-box" aria-pressed="${s === 'checked' ? 'true' : 'false'}" aria-label="${s === 'checked' ? 'Checked' : s === 'na' ? 'Not applicable' : 'Unchecked'}: ${item.label.replace(/"/g, '&quot;')}">${checkSvg}</button>
       <div class="check-main">
         <div class="check-tagrow">
           <span class="check-tag ${tagClass}">${tagLabel}</span>
           <button class="na-btn ${s === 'na' ? 'active' : ''}" type="button" data-act="na">${s === 'na' ? 'N/A ✓' : 'N/A'}</button>
-          ${hasExample ? `<button class="example-btn" type="button" data-act="example" aria-label="See example for: ${item.label}" aria-haspopup="dialog">Sample</button>` : ''}
+          ${hasExample ? `<button class="example-btn" type="button" data-act="example" aria-haspopup="dialog">Sample</button>` : ''}
         </div>
         <div class="check-label">${item.label}</div>
         <div class="check-hint">${item.hint}</div>
@@ -795,17 +795,37 @@ function updateScore() {
   }
 }
 
+const TAB_ORDER = ['website', 'social', 'campaign', 'comms'];
+
 function switchTab(sec) {
-  Object.keys(data).forEach(s => {
-    const panel = document.getElementById('section-' + s);
+  TAB_ORDER.forEach(s => {
+    const panel  = document.getElementById('section-' + s);
     const tabBtn = document.getElementById('tab-' + s);
-    panel.classList.toggle('visible', s === sec);
-    tabBtn.setAttribute('aria-selected', s === sec ? 'true' : 'false');
-    tabBtn.classList.toggle('active', s === sec);
+    const isActive = s === sec;
+    panel.classList.toggle('visible', isActive);
+    tabBtn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    tabBtn.setAttribute('tabindex', isActive ? '0' : '-1');
+    tabBtn.classList.toggle('active', isActive);
   });
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.getElementById('section-' + sec).scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
 }
+
+/* Arrow key navigation for the tablist */
+document.getElementById('tab-website').closest('[role="tablist"]').addEventListener('keydown', function(e) {
+  const tabs = TAB_ORDER.map(s => document.getElementById('tab-' + s));
+  const currentIdx = tabs.findIndex(t => t === document.activeElement);
+  if (currentIdx === -1) return;
+  let nextIdx;
+  if (e.key === 'ArrowRight') nextIdx = (currentIdx + 1) % tabs.length;
+  else if (e.key === 'ArrowLeft') nextIdx = (currentIdx - 1 + tabs.length) % tabs.length;
+  else if (e.key === 'Home') nextIdx = 0;
+  else if (e.key === 'End') nextIdx = tabs.length - 1;
+  else return;
+  e.preventDefault();
+  switchTab(TAB_ORDER[nextIdx]);
+  tabs[nextIdx].focus();
+});
 
 function resetAll() {
   if (!confirm('Reset all audit responses? This cannot be undone.')) return;
@@ -884,7 +904,7 @@ const examples = {
 let lastFocusedBtn = null;
 
 function setPageInert(inert) {
-  ['nav', 'header', '.overview', '#main-content', 'footer'].forEach(sel => {
+  ['[role="banner"]', '.hero', '.overview', '#main-content', 'footer'].forEach(sel => {
     const el = document.querySelector(sel);
     if (el) el.inert = inert;
   });
