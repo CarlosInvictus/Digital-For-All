@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- ════════════════════════════════════════════════════════════════
      DIGITAL FOR ALL — RunItByDIA Self-Audit Tool
-     VISUAL REDESIGN — matches the supplied mockup (navy header/footer,
+     RUN IT BY DIA BRANDING — white header, blue section bands, dark footer,
      card-grid checklist, "Level by Section" + "Maturity Tiers" overview).
 
      This is a SEPARATE file from index.html on purpose, since you're
@@ -29,12 +29,21 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Digital For All — Inclusion & Accessibility Self-Audit</title>
+<title>Run it by DIA — Accessibility & Inclusion Self-Audit</title>
 <meta name="description" content="A free self-audit checklist for digital marketers in the Philippines to assess their accessibility and inclusive communication practices. Launched for the Digital For All advocacy.">
-<meta property="og:title" content="Digital For All — Inclusion & Accessibility Self-Audit">
+<meta property="og:title" content="Run it by DIA — Accessibility & Inclusion Self-Audit">
 <meta property="og:description" content="Audit your website, social media, campaigns, and communication for accessibility and inclusion. Free tool by Invictus PH.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://audit.runitbydia.com/assets/logo-color.png">
+<link rel="icon" href="assets/favicon.png">
 <style>
+  /* ── BRAND FONTS (files in /assets/fonts) ──
+     Roboto ships only Regular + Medium here, so Medium covers all bold weights. */
+  @font-face { font-family: 'Museo Sans Rounded'; src: url('assets/fonts/MuseoSansRounded700.otf') format('opentype'); font-weight: 100 850; font-display: swap; }
+  @font-face { font-family: 'Museo Sans Rounded'; src: url('assets/fonts/MuseoSansRounded900.otf') format('opentype'); font-weight: 851 1000; font-display: swap; }
+  @font-face { font-family: 'Roboto'; src: url('assets/fonts/Roboto-Regular.ttf') format('truetype'); font-weight: 100 449; font-display: swap; }
+  @font-face { font-family: 'Roboto'; src: url('assets/fonts/Roboto-Medium.ttf') format('truetype'); font-weight: 450 1000; font-display: swap; }
+
   /* ── ACCESSIBILITY UTILITIES ── */
   .sr-only {
     position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -52,49 +61,52 @@
 
   /* [EDIT: COLORS] — change these to retheme the whole tool */
   :root {
-    --navy:        #0c1424;
-    --navy-soft:   #121b2e;
-    --blue:        #2563eb;
-    --blue-dark:   #1d4ed8;
+    --ink:         #10131C;
+    --blue:        #004DBF;
+    --blue-dark:   #003A91;
+    --purple:      #4226AD;
+    --green:       #0C5953;
+    --cyan:        #00FAFF;
+    --font-head:   'Museo Sans Rounded', 'Roboto', system-ui, sans-serif;
 
-    --must-bg:     #ede9fe;
-    --must-text:   #6d28d9;
-    --should-bg:   #dbeafe;
-    --should-text: #1d4ed8;
-    --good-bg:     #dcfce7;
-    --good-text:   #15803d;
+    --must-bg:     #ECE8F8;
+    --must-text:   #4226AD;
+    --should-bg:   #E0EAF8;
+    --should-text: #004DBF;
+    --good-bg:     #DDEDEA;
+    --good-text:   #0C5953;
 
-    --tier-awareness-bg:   #fdebd3;
-    --tier-awareness-text: #ab4e09;
-    --tier-practicing-bg:  #dbeafe;
-    --tier-practicing-text:#1d4ed8;
-    --tier-advancing-bg:   #ede9fe;
-    --tier-advancing-text: #6d28d9;
-    --tier-leading-bg:     #dcfce7;
-    --tier-leading-text:   #15803d;
-    --tier-notstarted-bg:  #e5e7eb;
-    --tier-notstarted-text:#606672;
+    --tier-awareness-bg:   #ECE8F8;
+    --tier-awareness-text: #4226AD;
+    --tier-practicing-bg:  #E0EAF8;
+    --tier-practicing-text:#004DBF;
+    --tier-advancing-bg:   #DDEDEA;
+    --tier-advancing-text: #0C5953;
+    --tier-leading-bg:     #10131C;
+    --tier-leading-text:   #00FAFF;
+    --tier-notstarted-bg:  #E6E8EC;
+    --tier-notstarted-text:#4B5360;
 
-    --bg-page:     #f4f5f7;
+    --bg-page:     #F7FBFF;
     --bg-card:     #ffffff;
-    --bg-img:      #eef0f3;
-    --text-primary:#0c1424;
-    --text-secondary:#4b5360;
-    --text-tertiary:#606672;
-    --border:      #e3e5ea;
-    --border-med:  #cdd1d9;
+    --bg-img:      #EDF1F6;
+    --text-primary:#10131C;
+    --text-secondary:#4B5360;
+    --text-tertiary:#5A6170;
+    --border:      #E1E6EE;
+    --border-med:  #C9D0DB;
     --radius-sm:   8px;
     --radius-md:   12px;
     --radius-lg:   18px;
     --radius-xl:   24px;
-    --shadow-sm:   0 1px 3px rgba(12,20,36,0.06), 0 1px 2px rgba(12,20,36,0.04);
-    --shadow-md:   0 8px 24px rgba(12,20,36,0.08), 0 2px 6px rgba(12,20,36,0.04);
+    --shadow-sm:   0 1px 3px rgba(16,19,28,0.06), 0 1px 2px rgba(16,19,28,0.04);
+    --shadow-md:   0 8px 24px rgba(16,19,28,0.08), 0 2px 6px rgba(16,19,28,0.04);
   }
 
   @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 
   body {
-    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-family: 'Roboto', system-ui, -apple-system, sans-serif;
     background: var(--bg-page);
     color: var(--text-primary);
     line-height: 1.6;
@@ -104,24 +116,18 @@
   .wrap { max-width: 920px; margin: 0 auto; padding: 0 1.5rem; }
 
   /* ── NAV / HEADER ── */
-  .nav { background: var(--navy); color: #fff; }
+  .nav { background: #fff; border-bottom: 1px solid var(--border); }
   .nav-inner {
     max-width: 920px; margin: 0 auto; padding: 1.1rem 1.5rem;
     display: flex; align-items: center; gap: 12px; justify-content: space-between;
   }
-  .nav-name { font-size: 19px; font-weight: 700; letter-spacing: -0.01em; }
-  .nav-tag { font-size: 12px; color: #9aa3b5; margin-top: 1px; }
-  .nav-beta-badge {
-    display: flex; flex-direction: column; align-items: flex-end; gap: 3px; flex-shrink: 0;
+  .nav-logo { display: block; height: 56px; width: auto; }
+  .nav-back {
+    flex-shrink: 0; font-size: 13px; font-weight: 700; text-decoration: none;
+    background: var(--blue); color: #fff; padding: 9px 16px; border-radius: 99px;
   }
-  .nav-beta-pill {
-    font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
-    background: #f59e0b; color: #1c1002; padding: 3px 9px; border-radius: 99px;
-  }
-  .nav-beta-text {
-    font-size: 12px; color: #9aa3b5;
-  }
-  @media (max-width: 480px) { .nav-beta-text { display: none; } }
+  .nav-back:hover { background: var(--blue-dark); }
+  .nav-back:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
   /* ── HERO ── */
   .hero { background: var(--bg-page); padding: 2.75rem 0 1.5rem; }
@@ -129,28 +135,12 @@
     font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--blue); margin-bottom: 0.9rem;
   }
-  .hero-title {
-    font-size: clamp(1.9rem, 4.5vw, 2.7rem); font-weight: 800; letter-spacing: -0.02em;
-    line-height: 1.15; color: var(--text-primary); margin-bottom: 1.1rem;
-  }
-  .hero-title em { font-style: normal; color: var(--blue); }
-  .hero-desc {
-    font-size: 1rem; color: var(--text-secondary); max-width: 600px; line-height: 1.7;
-    margin-bottom: 1.4rem;
-  }
-  .hero-meta {
-    display: flex; flex-wrap: wrap; gap: 0.5rem 1.6rem; font-size: 13.5px;
-    color: var(--text-tertiary); padding-bottom: 1.6rem; border-bottom: 1px solid var(--border);
-  }
-  .hero-meta strong { color: var(--text-primary); font-weight: 700; }
-
   .hero-steps {
     list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
-    margin-top: 1.6rem;
   }
   .hero-step { display: flex; align-items: flex-start; gap: 10px; }
   .hero-step-num {
-    flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: var(--navy);
+    flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: var(--blue);
     color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center;
   }
   .hero-step-text { font-size: 13px; color: var(--text-secondary); line-height: 1.5; padding-top: 3px; }
@@ -161,7 +151,7 @@
 
   /* ── OVERVIEW (Level by Section / Maturity Tiers) ── */
   .overview { background: var(--bg-page); padding: 2.25rem 0 0.5rem; }
-  .overview-title { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 0.9rem; }
+  .overview-title { font-family: var(--font-head); font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 0.9rem; }
 
   .level-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 1.6rem; }
   .level-card {
@@ -171,7 +161,7 @@
   }
   .level-card:hover { border-color: var(--border-med); }
   .level-card:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
-  .level-card.active { border-color: var(--navy); border-width: 1.5px; }
+  .level-card.active { border-color: var(--blue); border-width: 1.5px; }
   .level-card-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-bottom: 14px; }
   .level-card-name { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--text-primary); }
   .level-card-name svg { width: 17px; height: 17px; color: var(--text-secondary); flex-shrink: 0; }
@@ -196,7 +186,7 @@
   .priority-legend-item { display: flex; align-items: center; gap: 7px; }
   .priority-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
 
-  .tiers-title { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 0.9rem; }
+  .tiers-title { font-family: var(--font-head); font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 0.9rem; }
   .tier-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 1.8rem; }
   .tier-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px; }
   .tier-card-label {
@@ -222,20 +212,20 @@
   }
   .cta-card strong { font-weight: 700; }
 
-  /* ── SECTION BAND (navy header per section, like mockup) ── */
+  /* ── SECTION BAND (brand-blue header per section) ── */
   .section-panel { display: none; }
   .section-panel.visible { display: block; margin-bottom: 2.5rem; }
-  .section-band { background: var(--navy); color: #fff; padding: 1.7rem 0; margin-bottom: 1.6rem; }
+  .section-band { background: var(--blue); color: #fff; padding: 1.7rem 0; margin-bottom: 1.6rem; }
   .section-band-inner { max-width: 920px; margin: 0 auto; padding: 0 1.5rem; }
   .section-band-top { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
   .section-band-icon { display: flex; align-items: center; }
   .section-band-icon svg { width: 26px; height: 26px; stroke: #fff; }
-  .section-band-title { font-size: 26px; font-weight: 800; letter-spacing: -0.01em; }
+  .section-band-title { font-family: var(--font-head); font-size: 26px; font-weight: 800; letter-spacing: -0.01em; }
   .section-band-pill {
     font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 99px;
-    background: rgba(255,255,255,0.12); white-space: nowrap;
+    background: rgba(255,255,255,0.16); white-space: nowrap;
   }
-  .section-band-desc { font-size: 14px; color: #b8bfcd; max-width: 640px; }
+  .section-band-desc { font-size: 14px; color: #E0EAF8; max-width: 640px; }
 
   /* ── CHECKLIST GRID ── */
   .checklist-grid {
@@ -250,7 +240,7 @@
   }
   .check-card:hover { border-color: var(--border-med); }
   .check-card:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
-  .check-card.checked { border-color: var(--navy); border-width: 2px; padding: 15px; }
+  .check-card.checked { border-color: var(--green); border-width: 2px; padding: 15px; }
   .check-card.na { opacity: 0.6; }
 
   .check-box {
@@ -260,7 +250,7 @@
   }
   .check-box:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
   .check-box svg { width: 14px; height: 14px; display: none; }
-  .check-card.checked .check-box { background: #16a34a; border-color: #16a34a; }
+  .check-card.checked .check-box { background: var(--green); border-color: var(--green); }
   .check-card.checked .check-box svg { display: block; stroke: #fff; }
   .check-card.na .check-box { background: var(--bg-img); }
 
@@ -282,7 +272,7 @@
     border: 1px solid var(--border); border-radius: 99px; padding: 4px 11px; cursor: pointer;
     white-space: nowrap; transition: all .15s;
   }
-  .na-btn.active { background: #fdebd3; border-color: #f3c98c; color: #b1530b; }
+  .na-btn.active { background: var(--tier-notstarted-bg); border-color: var(--ink); color: var(--ink); }
   .na-btn:hover { background: var(--border); }
   .na-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
@@ -292,23 +282,23 @@
   .example-btn {
     display: flex; align-items: center; gap: 8px; width: 100%;
     padding: 9px 14px; border-radius: var(--radius-sm);
-    background: var(--should-bg); border: 1px solid #93c5fd;
+    background: var(--should-bg); border: 1px solid #A9C3EC;
     color: var(--blue); font-size: 13px; font-weight: 600;
     cursor: pointer; transition: all .15s; text-align: left;
   }
-  .example-btn:hover { background: #bfdbfe; border-color: var(--blue); }
+  .example-btn:hover { background: #CFDDF3; border-color: var(--blue); }
   .example-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   .example-btn .example-btn-arrow { margin-left: auto; opacity: .7; }
   .example-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
 
   /* ── FOOTER ── */
-  .footer { background: var(--navy); color: #fff; padding: 2.5rem 0 1.5rem; margin-top: 2rem; }
+  .footer { background: var(--ink); color: #fff; padding: 2.5rem 0 1.5rem; margin-top: 2rem; }
   .footer-inner { max-width: 920px; margin: 0 auto; padding: 0 1.5rem; }
   .footer-top {
     display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;
     margin-bottom: 1.8rem;
   }
-  .footer-brand { font-size: 17px; font-weight: 800; margin-bottom: 6px; }
+  .footer-logo { display: block; height: 72px; width: auto; margin-bottom: 10px; }
   .footer-tagline { font-size: 13.5px; color: #aab1c0; font-style: italic; max-width: 320px; }
   .footer-links { display: flex; flex-direction: column; gap: 8px; }
   .footer-links a { font-size: 13px; color: #cbd1dd; text-decoration: none; }
@@ -324,12 +314,12 @@
 
   /* ── EXAMPLE POPOVER MODAL (reused engine) ── */
   .popover-backdrop {
-    display: none; position: fixed; inset: 0; background: rgba(12,20,36,0.5); z-index: 200;
+    display: none; position: fixed; inset: 0; background: rgba(16,19,28,0.5); z-index: 200;
     align-items: center; justify-content: center; padding: 1rem;
   }
   .popover-backdrop.open { display: flex; }
   .popover-card {
-    background: #fff; border-radius: var(--radius-xl); box-shadow: 0 20px 60px rgba(12,20,36,0.25);
+    background: #fff; border-radius: var(--radius-xl); box-shadow: 0 20px 60px rgba(16,19,28,0.25);
     width: 100%; max-width: 540px; max-height: 90vh; overflow-y: auto; position: relative;
   }
   @media (prefers-reduced-motion: no-preference) {
@@ -360,7 +350,7 @@
   .example-img-placeholder svg { width: 28px; height: 28px; opacity: .4; }
   .example-caption { font-size: 11.5px; color: var(--text-secondary); line-height: 1.5; padding: 9px 11px; border-top: 1px solid var(--border); background: #fff; }
   .example-text-only { padding: 11px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; background: #fff; }
-  .col-do   .example-text-only { border-left: 3px solid #16a34a; }
+  .col-do   .example-text-only { border-left: 3px solid var(--green); }
   .col-dont .example-text-only { border-left: 3px solid #dc2626; }
 </style>
 </head>
@@ -370,27 +360,14 @@
 <!-- [EDIT: NAV / HERO TEXT] — brand name, tagline, headline, and intro copy below -->
 <header class="nav" role="banner">
   <div class="nav-inner">
-    <div>
-      <div class="nav-name">Digital for All</div>
-      <div class="nav-tag">RunItByDIA</div>
-    </div>
-    <div class="nav-beta-badge" role="status" aria-label="Tool status: Beta Testing — Under Accessibility Audit">
-      <span class="nav-beta-pill">BETA v1.5</span>
-      <span class="nav-beta-text">Under Accessibility Audit</span>
-    </div>
+    <img class="nav-logo" src="assets/logo-color.png" alt="Run it by DIA" width="480" height="396">
+    <a class="nav-back" href="https://www.runitbydia.com">Go back to website</a>
   </div>
 </header>
 
 <section class="hero" aria-label="Introduction">
   <div class="wrap">
-    <h1 class="hero-title">Accessibility &amp; Inclusive<br>Communication <em>Self-Audit</em></h1>
-    <p class="hero-desc">A practical checklist for digital marketing professionals in the Philippines to assess their practices against accessibility standards and inclusive communication principles — grounded in WCAG 2.1 AA and the UNCRPD.</p>
-    <div class="hero-meta">
-      <span><strong>40 items</strong> across 4 sections</span>
-      <span><strong>WCAG 2.1 AA</strong> aligned</span>
-      <span><strong>Free</strong> · No login required</span>
-      <span>Initiated by <strong>Invictus PH</strong></span>
-    </div>
+    <h1 class="sr-only">Accessibility &amp; Inclusive Communication Self-Audit</h1>
     <ol class="hero-steps" role="list" aria-label="How to use this tool">
       <li class="hero-step"><span class="hero-step-num">1</span><span class="hero-step-text">Pick a section below — Website, Social media, Campaign, or Inclusive comms.</span></li>
       <li class="hero-step"><span class="hero-step-num">2</span><span class="hero-step-text">Check off each item that's already true for you. Mark N/A if it doesn't apply.</span></li>
@@ -448,9 +425,9 @@
 
     <div class="priority-legend" role="note" aria-label="Priority level legend">
       <strong>Priority:</strong>
-      <span class="priority-legend-item"><span class="priority-dot" aria-hidden="true" style="background:#6d28d9"></span> Must do — legal &amp; ethical obligation</span>
-      <span class="priority-legend-item"><span class="priority-dot" aria-hidden="true" style="background:#2563eb"></span> Should do — strong practice</span>
-      <span class="priority-legend-item"><span class="priority-dot" aria-hidden="true" style="background:#16a34a"></span> Good practice — leadership level</span>
+      <span class="priority-legend-item"><span class="priority-dot" aria-hidden="true" style="background:var(--purple)"></span> Must do — legal &amp; ethical obligation</span>
+      <span class="priority-legend-item"><span class="priority-dot" aria-hidden="true" style="background:var(--blue)"></span> Should do — strong practice</span>
+      <span class="priority-legend-item"><span class="priority-dot" aria-hidden="true" style="background:var(--green)"></span> Good practice — leadership level</span>
     </div>
 
     <h2 class="tiers-title">Maturity Tiers</h2>
@@ -576,7 +553,8 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div>
-        <div class="footer-brand">Digital for All</div>
+        <img class="footer-logo" src="assets/logo-white.png" alt="Run it by DIA" width="480" height="396">
+        <div class="footer-tagline" style="font-style:normal;margin-bottom:6px">A free self-audit tool for Digital Inclusion &amp; Accessibility</div>
         <div class="footer-tagline">"Nothing about us without us. No access, no inclusion."</div>
         <div class="footer-tagline" style="margin-top:6px;font-style:normal">#DapatPwede</div>
       </div>
@@ -728,16 +706,16 @@ const LEVEL_ORDER = ['notstarted', 'awareness', 'practicing', 'advancing', 'lead
 const LEVEL_META = {
   notstarted: { label: 'Not started', cls: 'ml-notstarted' },
   awareness:  { label: 'Awareness',   cls: 'ml-awareness',
-    ctaStyle: 'background:var(--tier-awareness-bg);border:1px solid #f3c98c;color:#7c3a06',
+    ctaStyle: 'background:var(--tier-awareness-bg);border:1px solid #CFC6EE;color:#2E1A7A',
     ctaHtml: '<strong>Your next step:</strong> Focus on the "Must do" items first — these are legal and ethical obligations under the UNCRPD and WCAG 2.1 AA. You cannot reach Practicing until all applicable Musts are checked. Consider a disability inclusion workshop to help your team understand the why behind each requirement.' },
   practicing: { label: 'Practicing',  cls: 'ml-practicing',
-    ctaStyle: 'background:var(--tier-practicing-bg);border:1px solid #bcd6fb;color:#1e3a8a',
+    ctaStyle: 'background:var(--tier-practicing-bg);border:1px solid #B9CDEE;color:#003A91',
     ctaHtml: '<strong>You\'ve cleared the baseline.</strong> All critical obligations are in place — that matters. Now build on this by tackling the "Should do" items, which represent strong, consistent practice. Integrate accessibility into your standard workflows rather than treating it as a one-time exercise.' },
   advancing:  { label: 'Advancing',   cls: 'ml-advancing',
-    ctaStyle: 'background:var(--tier-advancing-bg);border:1px solid #d6caf9;color:#4c1d95',
+    ctaStyle: 'background:var(--tier-advancing-bg);border:1px solid #B5D6CF;color:#08403C',
     ctaHtml: '<strong>You\'re doing well beyond the minimum.</strong> Musts and Shoulds are solid. The "Good practice" items are what separate compliance from genuine leadership — they show Persons with Disability that you\'re not just avoiding harm, you\'re actively creating space for inclusion.' },
   leading:    { label: 'Leading',     cls: 'ml-leading',
-    ctaStyle: 'background:var(--tier-leading-bg);border:1px solid #b6e6c4;color:#14532d',
+    ctaStyle: 'background:var(--tier-leading-bg);border:1px solid var(--ink);color:#fff',
     ctaHtml: '<strong>Outstanding — you\'re setting the standard.</strong> Consider publishing your accessibility practices publicly, mentoring peers in the industry, and advocating for a national digital accessibility law in the Philippines. Digital For All needs champions like you.' },
 };
 const POINTS = { must: 3, should: 2, good: 1 };
